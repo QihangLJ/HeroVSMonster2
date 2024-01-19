@@ -60,5 +60,11 @@ namespace BattleFunctions
             }
             return sortedStringArray;
         }
+
+        public static bool CheckIsDead(float health)
+        //Valida si el personaje esta muerto o no.
+        {
+            return health <= 0;
+        }
     }
 }

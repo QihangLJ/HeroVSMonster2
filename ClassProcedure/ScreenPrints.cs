@@ -1,4 +1,6 @@
-﻿namespace MessagePrints
+﻿using BattleFunctions;
+
+namespace MessagePrints
 {
     public class Print
     {
@@ -26,6 +28,38 @@
             const string MsgWarning = "It's round: {0}";
             round++;
             Console.WriteLine(MsgWarning.ToUpper(), round);
+        }
+
+        public static void PrintHealthMessage(float[] healthArray, string[] nameArray)
+        //Muestra la vida de los heroes o si estan muertos.
+        {
+            const string MsgSituation = "   - {0} have {1} HP";
+            const string MsgDead = "   - {0} is DEAD";
+
+            for (int i = 0; i < healthArray.Length; i++)
+            {
+                if (Battle.CheckIsDead(healthArray[i]))
+                {
+                    Console.WriteLine(MsgDead, nameArray[i].ToUpper());
+                }
+                else
+                {
+                    Console.WriteLine(MsgSituation, nameArray[i].ToUpper(), healthArray[i]);
+                }
+            }
+        }
+
+        public static void ShowSortedHealth(float[] healthArray, string[] nameArray)
+        //Muestra de forma descendiente la situacion de los heroes en la batalla o si estan muertos.
+        {
+            const string MsgBattleSituation = "The battle situation is the next:";
+
+            float[] DescendantHealthSort = Battle.SortCharacterDescendant(healthArray);
+            string[] DescendantNameSort = Battle.SortCharacterDescendant(healthArray, nameArray);
+
+            Console.WriteLine(MsgBattleSituation.ToUpper());
+
+            PrintHealthMessage(DescendantHealthSort, DescendantNameSort);
         }
     }
 }
