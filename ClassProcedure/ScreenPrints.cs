@@ -19,5 +19,13 @@
 
             Console.WriteLine($"{MsgFirstDifficulty} \n{MsgSecondDifficulty} \n{MsgThirdDifficulty} \n{MsgFourthDifficulty}");
         }
+
+        public static void ShowRoundCounter(ref int round)
+        //Muestra un contador al inicio de cada ronda, que va aumentando segun las rondas que vaya pasando.
+        {
+            const string MsgWarning = "It's round: {0}";
+            round++;
+            Console.WriteLine(MsgWarning.ToUpper(), round);
+        }
     }
 }
