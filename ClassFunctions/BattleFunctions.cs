@@ -66,5 +66,18 @@ namespace BattleFunctions
         {
             return health <= 0;
         }
+
+        public static bool CheckDefeat(float[] healthArray)
+        //Valida si todos los heroes estan muertos, si es asi, gana el monstruo.
+        {
+            for (int i = 0; i < healthArray.Length; i++)
+            {
+                if (!CheckIsDead(healthArray[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
