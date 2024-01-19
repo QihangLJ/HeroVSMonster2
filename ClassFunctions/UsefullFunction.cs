@@ -7,6 +7,7 @@
         {
             return value >= min && value <= max;
         }
+
         public static int AssignValueInRange(int maxError, int min, int max)
         //Pide al usuario introducir un valor y comprueba que esta dentro del rango, si son valores fuera de rango entonces los errores se van acumulando.
         {
@@ -32,6 +33,7 @@
             //En caso de fallar 3 veces, devolvera -1 (ExhaustedAttemtps) indicando que el usuario se quedo sin intentos.
             return errorAttempts == maxError ? ExhaustedAttemtps : userInput;
         }
+
         public static string EnterCharacterNames()
         //Pide al usuario introducir una string y lo devuelve.
         {
@@ -42,6 +44,7 @@
 
             return Console.ReadLine()!;
         }
+
         public static void AssignNameWithString(string name, ref string firstName, ref string secondName, ref string thirdName, ref string fouthName)
         //Asigna los cuatro primeros nombres (separado por ',') de la cadena de nombres a los cuatro heroes.
         {
@@ -52,6 +55,46 @@
             secondName = nameStringArray[positionTwo].Trim();
             thirdName = nameStringArray[positionThree].Trim();
             fouthName = nameStringArray[positionFour].Trim();
+        }
+
+        public static float[] CopyFloatArray(float[] original)
+        //Crea una copia de un array de float.
+        {
+            float[] copy = new float[original.Length];
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                copy[i] = original[i];
+            }
+            return copy;
+        }
+
+        public static string[] CopyStringArray(string[] original)
+        //Crea una copia de un array de string.
+        {
+            string[] copy = new string[original.Length];
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                copy[i] = original[i];
+            }
+            return copy;
+        }
+
+        public static void ExchangeFloatVariable(ref float valueOne, ref float valueTwo)
+        //Intercambia los valores de dos variables FLOAT.
+        {
+            float temp = valueOne;
+            valueOne = valueTwo;
+            valueTwo = temp;
+        }
+
+        public static void ExchangeStringVariable(ref string valueOne, ref string valueTwo)
+        //Intercambia los valores de dos variables STRING.
+        {
+            string temp = valueOne;
+            valueOne = valueTwo;
+            valueTwo = temp;
         }
     }
 }
