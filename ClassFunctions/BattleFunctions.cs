@@ -1,4 +1,4 @@
-﻿namespace BattleFucntions
+﻿namespace BattleFunctions
 {
     public class Battle
     {
