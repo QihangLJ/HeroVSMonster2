@@ -34,6 +34,10 @@ namespace M03UF2PR1
                 nameInput = Utility.EnterCharacterNames();
                 Utility.AssignNameWithString(nameInput, ref archerName, ref barbarianName, ref wizardName, ref druidName);
 
+                //Selecionamos el modo de juego o la dificultad que queremos jugar.
+                Print.MenuGameDifficulty();
+                userSelection = Utility.AssignValueInRange(MaxError, EasyMode, RandomMode);
+
             }
             else
             {

@@ -8,5 +8,16 @@
             const string MsgMenu = "Welcome to Hero VS Monster 2: \n1.Start a new battle \n0.Exit";
             Console.WriteLine(MsgMenu);
         }
+
+        public static void MenuGameDifficulty()
+        //Muestra el menu de modos de juego o digicultades del juego.
+        {
+            const string MsgFirstDifficulty = "1.Easy";
+            const string MsgSecondDifficulty = "2.Difficult";
+            const string MsgThirdDifficulty = "3.Personalized";
+            const string MsgFourthDifficulty = "4.Random";
+
+            Console.WriteLine($"{MsgFirstDifficulty} \n{MsgSecondDifficulty} \n{MsgThirdDifficulty} \n{MsgFourthDifficulty}");
+        }
     }
 }
