@@ -1,6 +1,6 @@
-﻿namespace ClassFunctions
+﻿namespace CreationFunctions
 {
-    public class CreationFunctions
+    public class Creation
     {
 
     }

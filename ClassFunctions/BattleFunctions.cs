@@ -1,6 +1,7 @@
-﻿namespace ClassFunctions
+﻿namespace BattleFucntions
 {
-    internal class BattleFucntions
+    public class Battle
     {
+
     }
 }
