@@ -68,8 +68,13 @@ namespace M03UF2PR1
                             break;
 
                         case DifficultMode:
-                            break;
+                            Creation.AssignAttributeValue(ref archerHealth, ArcherMinHealth, ref archerDamage, ArcherMinDamage, ref archerDamageReduction, ArcherMinDamageReduction);
+                            Creation.AssignAttributeValue(ref barbarianHealth, BarbarianMinHealth, ref barbarianDamage, BarbarianMinDamage, ref barbarianDamageReduction, BarbarianMinDamageReduction);
+                            Creation.AssignAttributeValue(ref wizardHealth, WizardMinHealth, ref wizardDamage, WizardMinDamage, ref wizardDamageReduction, WizardMinDamageReduction);
+                            Creation.AssignAttributeValue(ref druidHealth, DruidMinHealth, ref druidDamage, DruidMinDamage, ref druidDamageReduction, DruidMinDamageReduction);
 
+                            Creation.AssignAttributeValue(ref monsterHealth, MonsterMaxHealth, ref monsterDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMaxDamageReduction);
+                            break;
                         case PersonalizedMode:
                             break;
 
