@@ -20,7 +20,9 @@ namespace M03UF2PR1
                       WizardMinHealth = 1100, WizardMaxHealth = 1500, WizardMinDamage = 300, WizardMaxDamage = 400, WizardMinDamageReduction = 20, WizardMaxDamageReduction = 35,
                       DruidMinHealth = 2000, DruidMaxHealth = 2500, DruidMinDamage = 70, DruidMaxDamage = 120, DruidMinDamageReduction = 25, DruidMaxDamageReduction = 40,
                       MonsterMinHealth = 7000, MonsterMaxHealth = 10000, MonsterMinDamage = 300, MonsterMaxDamage = 400, MonsterMinDamageReduction = 20, MonsterMaxDamageReduction = 30;
-
+            
+            const string MonsterName = "Monster";
+            const string MsgCreationTurn = "{0} Creation...";
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
 
@@ -76,8 +78,21 @@ namespace M03UF2PR1
                             Creation.AssignAttributeValue(ref monsterHealth, MonsterMaxHealth, ref monsterDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMaxDamageReduction);
                             break;
                         case PersonalizedMode:
-                            break;
+                            Console.WriteLine(MsgCreationTurn, archerName);
+                            Creation.AssignAttributeValue(ref archerHealth, ArcherMinHealth, ArcherMaxHealth, ref archerDamage, ArcherMinDamage, ArcherMaxDamage, ref archerDamageReduction, ArcherMinDamageReduction, ArcherMaxDamageReduction, MaxError);
 
+                            Console.WriteLine(MsgCreationTurn, barbarianName);
+                            Creation.AssignAttributeValue(ref barbarianHealth, BarbarianMinHealth, BarbarianMaxHealth, ref barbarianDamage, BarbarianMinDamage, BarbarianMaxDamage, ref barbarianDamageReduction, BarbarianMinDamageReduction, BarbarianMaxDamageReduction, MaxError);
+
+                            Console.WriteLine(MsgCreationTurn, wizardName);
+                            Creation.AssignAttributeValue(ref wizardHealth, WizardMinHealth, WizardMaxHealth, ref wizardDamage, WizardMinDamage, WizardMaxDamage, ref wizardDamageReduction, WizardMinDamageReduction, WizardMaxDamageReduction, MaxError);
+
+                            Console.WriteLine(MsgCreationTurn, druidName);
+                            Creation.AssignAttributeValue(ref druidHealth, DruidMinHealth, DruidMaxHealth, ref druidDamage, DruidMinDamage, DruidMaxDamage, ref druidDamageReduction, DruidMinDamageReduction, DruidMaxDamageReduction, MaxError);
+
+                            Console.WriteLine(MsgCreationTurn, MonsterName);
+                            Creation.AssignAttributeValue(ref monsterHealth, MonsterMinHealth, MonsterMaxHealth, ref monsterDamage, MonsterMinDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMinDamageReduction, MonsterMaxDamageReduction, MaxError);
+                            break;
                         case RandomMode:
                             break;
                     }
