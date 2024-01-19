@@ -33,7 +33,10 @@ namespace M03UF2PR1
             int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0;
             
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
-
+            
+            string[] heroesNameArray, battleTurnOrder;
+            float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
+            
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
             
@@ -102,6 +105,13 @@ namespace M03UF2PR1
                             Creation.AssignAttributeValue(ref monsterHealth, MonsterMinHealth, MonsterMaxHealth, ref monsterDamage, MonsterMinDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMinDamageReduction, MonsterMaxDamageReduction);
                             break;
                     }
+
+                    //Assignamos todos los atributos en arrays para trabajar con ellos de manera mas facil.
+                    heroesNameArray = Creation.CreateStringArray(archerName, barbarianName, wizardName, druidName);
+                    heroesHealthArray = Creation.CreateFloatArray(archerHealth, barbarianHealth, wizardHealth, druidHealth);
+                    heroesDamageArray = Creation.CreateFloatArray(archerDamage, barbarianDamage, wizardDamage, druidDamage);
+                    heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
+
                 }
             }
             else
