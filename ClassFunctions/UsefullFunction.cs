@@ -1,5 +1,4 @@
-﻿
-namespace UsefullFunction
+﻿namespace UsefullFunction
 {
     public class Utility
     {
