@@ -56,5 +56,28 @@
             thirdName = nameStringArray[positionThree].Trim();
             fouthName = nameStringArray[positionFour].Trim();
         }
+
+        public static float[] CopyFloatArray(float[] original)
+        //Crea una copia de un array de float.
+        {
+            float[] copy = new float[original.Length];
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                copy[i] = original[i];
+            }
+            return copy;
+        }
+        public static string[] CopyStringArray(string[] original)
+        //Crea una copia de un array de string.
+        {
+            string[] copy = new string[original.Length];
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                copy[i] = original[i];
+            }
+            return copy;
+        }
     }
 }
