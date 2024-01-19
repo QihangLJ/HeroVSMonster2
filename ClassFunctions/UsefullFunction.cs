@@ -68,6 +68,7 @@
             }
             return copy;
         }
+
         public static string[] CopyStringArray(string[] original)
         //Crea una copia de un array de string.
         {
@@ -78,6 +79,21 @@
                 copy[i] = original[i];
             }
             return copy;
+        }
+        public static void ExchangeFloatVariable(ref float valueOne, ref float valueTwo)
+        //Intercambia los valores de dos variables FLOAT.
+        {
+            float temp = valueOne;
+            valueOne = valueTwo;
+            valueTwo = temp;
+        }
+
+        public static void ExchangeStringVariable(ref string valueOne, ref string valueTwo)
+        //Intercambia los valores de dos variables STRING.
+        {
+            string temp = valueOne;
+            valueOne = valueTwo;
+            valueTwo = temp;
         }
     }
 }
