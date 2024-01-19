@@ -32,5 +32,26 @@
             //En caso de fallar 3 veces, devolvera -1 (ExhaustedAttemtps) indicando que el usuario se quedo sin intentos.
             return errorAttempts == maxError ? ExhaustedAttemtps : userInput;
         }
+        public static string EnterCharacterNames()
+        //Pide al usuario introducir una string y lo devuelve.
+        {
+            const string AskCharacterName = "Enter a string with the names of the characters (separate with ',')";
+            const string MsgWarning = "follow the next order: Archer, Barbarian, Wizard and Druid";
+            Console.WriteLine(AskCharacterName);
+            Console.WriteLine(MsgWarning);
+
+            return Console.ReadLine()!;
+        }
+        public static void AssignNameWithString(string name, ref string firstName, ref string secondName, ref string thirdName, ref string fouthName)
+        //Asigna los cuatro primeros nombres (separado por ',') de la cadena de nombres a los cuatro heroes.
+        {
+            const int positionOne = 0, positionTwo = 1, positionThree = 2, positionFour = 3;
+            string[] nameStringArray = name.Split(',');
+
+            firstName = nameStringArray[positionOne].Trim();
+            secondName = nameStringArray[positionTwo].Trim();
+            thirdName = nameStringArray[positionThree].Trim();
+            fouthName = nameStringArray[positionFour].Trim();
+        }
     }
 }

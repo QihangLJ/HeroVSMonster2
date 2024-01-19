@@ -19,6 +19,7 @@ namespace M03UF2PR1
             const string MsgExit = "Leaving the game...";
 
             int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0;
+            string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
 
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
@@ -29,7 +30,10 @@ namespace M03UF2PR1
             }
             else if (userSelection == StartGame)
             {
-                    
+                //Ponmemos los nombres a los personajes.
+                nameInput = Utility.EnterCharacterNames();
+                Utility.AssignNameWithString(nameInput, ref archerName, ref barbarianName, ref wizardName, ref druidName);
+
             }
             else
             {
