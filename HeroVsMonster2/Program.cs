@@ -24,7 +24,12 @@ namespace M03UF2PR1
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
 
+            float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
+                wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
+                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0;
+
             int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0;
+            
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
 
             Print.MenuGame();
@@ -54,7 +59,12 @@ namespace M03UF2PR1
                     switch (userSelection)
                     {
                         case EasyMode:
-                            
+                            Creation.AssignAttributeValue(ref archerHealth, ArcherMaxHealth, ref archerDamage, ArcherMaxDamage, ref archerDamageReduction, ArcherMaxDamageReduction);
+                            Creation.AssignAttributeValue(ref barbarianHealth, BarbarianMaxHealth, ref barbarianDamage, BarbarianMaxDamage, ref barbarianDamageReduction, BarbarianMaxDamageReduction);
+                            Creation.AssignAttributeValue(ref wizardHealth, WizardMaxHealth, ref wizardDamage, WizardMaxDamage, ref wizardDamageReduction, WizardMaxDamageReduction);
+                            Creation.AssignAttributeValue(ref druidHealth, DruidMaxHealth, ref druidDamage, DruidMaxDamage, ref druidDamageReduction, DruidMaxDamageReduction);
+
+                            Creation.AssignAttributeValue(ref monsterHealth, MonsterMinHealth, ref monsterDamage, MonsterMinDamage, ref monsterDamageReduction, MonsterMinDamageReduction);
                             break;
 
                         case DifficultMode:
