@@ -36,5 +36,16 @@ namespace CreationFunctions
             if (attributeThree == Error)
                 attributeThree = minValueThree;
         }
+
+        public static void AssignAttributeValue(ref float attributeOne, int minValueOne, int maxValueOne, ref float attributeTwo, int minValueTwo, int maxValueTwo, ref float attributeThree, int minValueThree, int maxValueThree)
+        //Asigna los valores al atributo de cada personaje, para el nivel "RANDOM".
+        {
+            Random randValue = new Random();
+
+            attributeOne = randValue.Next(minValueOne, maxValueOne);
+            attributeTwo = randValue.Next(minValueTwo, maxValueTwo);
+            attributeThree = randValue.Next(minValueThree, maxValueThree);
+        }
+
     }
 }
