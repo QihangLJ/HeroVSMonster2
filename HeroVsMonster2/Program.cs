@@ -15,6 +15,12 @@ namespace M03UF2PR1
 
             const int EasyMode = 1, DifficultMode = 2, PersonalizedMode = 3, RandomMode = 4, ArcherPosition = 0, BarbarianPosition = 1, WizardPosition = 2, DruidPosition = 3;
 
+            const int ArcherMinHealth = 1500, ArcherMaxHealth = 2000, ArcherMinDamage = 200, ArcherMaxDamage = 300, ArcherMinDamageReduction = 25, ArcherMaxDamageReduction = 35,
+                      BarbarianMinHealth = 3000, BarbarianMaxHealth = 3750, BarbarianMinDamage = 150, BarbarianMaxDamage = 250, BarbarianMinDamageReduction = 35, BarbarianMaxDamageReduction = 45,
+                      WizardMinHealth = 1100, WizardMaxHealth = 1500, WizardMinDamage = 300, WizardMaxDamage = 400, WizardMinDamageReduction = 20, WizardMaxDamageReduction = 35,
+                      DruidMinHealth = 2000, DruidMaxHealth = 2500, DruidMinDamage = 70, DruidMaxDamage = 120, DruidMinDamageReduction = 25, DruidMaxDamageReduction = 40,
+                      MonsterMinHealth = 7000, MonsterMaxHealth = 10000, MonsterMinDamage = 300, MonsterMaxDamage = 400, MonsterMinDamageReduction = 20, MonsterMaxDamageReduction = 30;
+
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
 
@@ -38,6 +44,29 @@ namespace M03UF2PR1
                 Print.MenuGameDifficulty();
                 userSelection = Utility.AssignValueInRange(MaxError, EasyMode, RandomMode);
 
+                if (userSelection == Error)
+                {
+                    Console.WriteLine(MsgErrorInput);
+                }
+                else
+                {
+                    //Dependiendo del nivel de juego que hayamos selecionado, el "creación" de personaje sera de una manera o otra.
+                    switch (userSelection)
+                    {
+                        case EasyMode:
+                            
+                            break;
+
+                        case DifficultMode:
+                            break;
+
+                        case PersonalizedMode:
+                            break;
+
+                        case RandomMode:
+                            break;
+                    }
+                }
             }
             else
             {
