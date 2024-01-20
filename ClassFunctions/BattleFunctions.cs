@@ -117,5 +117,11 @@ namespace BattleFunctions
             const int CriticalPercentage = 10, FailedPercentage = 5;
             return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
         }
+
+        public static bool CheckCooldown(int inicialRound, int finalRound)
+        //Valida si el la habilidad esta en enfriamiento o no.
+        {
+            return inicialRound >= finalRound;
+        }
     }
 }
