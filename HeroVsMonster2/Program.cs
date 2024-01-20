@@ -41,13 +41,11 @@ namespace M03UF2PR1
 
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
-                wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
-                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
-                heroAttackDamage;
-
+                  wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
+                  monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
+                  heroAttackDamage;
             int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
             bool inGame = true, ExitHeroTurn = false;
-
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
             string[] heroesNameArray, battleTurnOrder;
