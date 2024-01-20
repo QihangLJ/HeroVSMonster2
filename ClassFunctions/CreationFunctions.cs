@@ -40,7 +40,7 @@ namespace CreationFunctions
         public static void AssignAttributeValue(ref float attributeOne, int minValueOne, int maxValueOne, ref float attributeTwo, int minValueTwo, int maxValueTwo, ref float attributeThree, int minValueThree, int maxValueThree)
         //Asigna los valores al atributo de cada personaje, para el nivel "RANDOM".
         {
-            Random randValue = new Random();
+            Random randValue = new();
 
             attributeOne = randValue.Next(minValueOne, maxValueOne);
             attributeTwo = randValue.Next(minValueTwo, maxValueTwo);

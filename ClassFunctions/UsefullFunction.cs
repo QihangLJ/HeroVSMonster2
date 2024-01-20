@@ -96,7 +96,7 @@
         public static bool Probability(int porcentaje)
         //Devuelve un booleano segun la suerte que hayamos tenido en acertar a la probabilidad.
         {
-            Random randValue = new Random();
+            Random randValue = new();
             return randValue.Next(1, 101) <= porcentaje;
         }
 
