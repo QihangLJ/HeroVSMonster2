@@ -1,4 +1,5 @@
 ﻿using BattleFunctions;
+using UsefullFunction;
 
 namespace MessagePrints
 {
@@ -60,6 +61,30 @@ namespace MessagePrints
             Console.WriteLine(MsgBattleSituation.ToUpper());
 
             PrintHealthMessage(DescendantHealthSort, DescendantNameSort);
+        }
+
+        public static int BattleAction(string name)
+        //Muestra y pide al usuario introducir una opcion valida para seguir con las acciones del juego.
+        {
+            const string MsgToUser = "Select the action for {0}: \n1. Attack \n2. Protect \n3. Special ability";
+            const int maxError = 3, minOption = 1, maxOption = 3;
+
+            Console.WriteLine(MsgToUser, name.ToUpper());
+
+            return Utility.AssignValueInRange(maxError, minOption, maxOption);
+        }
+
+        public static void ShowAttackInformation(string attackerName, float attackerDamage, string defensorName, float defensorHealth, float defensorDamageReduction)
+        //Muestra los datos tras el ataque de un personaje.
+        {
+            const string MsgCausedDmg = "{0} attacks {1} with: {2} DMG";
+            const string MsgReceiveDmg = "{0} defends himself and takes only: {1} DMG";
+            const string MsgRemainingLife = "The Remaining life of {0}: {1} HP";
+            const int Percentage = 100;
+
+            Console.WriteLine(MsgCausedDmg, attackerName, defensorName, attackerDamage);
+            Console.WriteLine(MsgReceiveDmg, defensorName, attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
+            Console.WriteLine(MsgRemainingLife, defensorName, defensorHealth);
         }
     }
 }
