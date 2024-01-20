@@ -222,6 +222,41 @@ namespace M03UF2PR1
                             i++;
                         }
 
+                        //Vuelve a comprobar si el monstruo esta vivo para ejecutar el turno del mosntruo si siguiera vivo..
+                        if (Battle.CheckIsDead(monsterHealth))
+                        {
+                            inGame = false;
+                        }
+                        else
+                        {
+                            //Al utilizar la habilidad del barbaro, se activara si estamos dentro de las 2 rondas que dura la habilidad y antes de que ataque el mosntruo.
+                            if (roundCount < barbarianCooldownCount)
+                            {
+                                heroesDmgRedArray[BarbarianPosition] = FullDamageReduction;
+                            }
+
+                            //Si la arquera usa su habilidad, deja sin atacar al monstruo durante 2 rondas.
+                            if (roundCount >= archerCooldownCount)
+                            {
+                                //El monstruo ataca a los heroes y muestra el daño que les han causado (por el orden de arquera, barbaro, mago, druida).
+                                heroesHealthArray = Battle.MonsterAttack(monsterDamage, heroesNameArray, heroesHealthArray, heroesDmgRedArray);
+
+                                //Muestra la salud de los heroes de forma descendiente.
+                                Print.ShowSortedHealth(heroesHealthArray, heroesNameArray);
+
+                                if (Battle.CheckDefeat(heroesHealthArray))
+                                {
+                                    Console.WriteLine(MsgMonsterVictory);
+                                    inGame = false;
+                                }
+                            }
+
+                            //Para reiniciar otra vez el atributo de reduccion de daño de los heroes, para los que se han protegido.
+                            heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
+
+                            //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
+                            Utility.CleanTheScreen();
+                        }
                     }
                 }
             }
