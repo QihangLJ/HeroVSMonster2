@@ -93,5 +93,22 @@ namespace BattleFunctions
             const int duplicate = 2;
             return userDamageReduction * duplicate;
         }
+
+        public static float CriticalAttack(float heroDamage)
+        //Avisa y devuelve el doble de daño por ser un critico.
+        {
+            const string MsgCritical = "CRITICAL ATTACK!";
+            const float Double = 2;
+            Console.WriteLine(MsgCritical);
+            return heroDamage * Double;
+        }
+
+        public static float FailedAttack(float heroDamage)
+        //Avisa y devuelve 0 ya que el heroe fallo el ataque.
+        {
+            const string MsgFailed = "FAILED THE ATTACK!";
+            Console.WriteLine(MsgFailed);
+            return heroDamage - heroDamage;
+        }
     }
 }
