@@ -1,9 +1,30 @@
 ﻿using UsefullFunction;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CreationFunctions
 {
     public class Creation
     {
+        public static float PersonalizeAttribute(string message, string item, int minValue, int maxValue, int maxError)
+        //Metodo para assignar un valor (introducido por el usuario) a un atributo en especifico, para el modo personalizado.
+        {
+            const string AutoAssign = "Auto assigned";
+            const int Error = -1;
+
+            float attribute;
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message, item, minValue, maxValue);
+            Console.ForegroundColor = ConsoleColor.Green;
+            attribute = Utility.AssignValueInRange(maxError, minValue, maxValue);
+            if (attribute == Error)
+            {
+                Console.WriteLine(AutoAssign.ToUpper());
+                attribute = minValue;
+            }
+            return attribute;
+        }
+
         public static void AssignAttributeValue(ref float attributeOne, int valueOne, ref float attributeTwo, int valueTwo, ref float attributeThree, int valueThree)
         //Asigna los valores al atributo de cada personaje, para los niveles "EASY" y "DIFFICULT".
         {
@@ -19,22 +40,12 @@ namespace CreationFunctions
             const string Health = "HEALTH";
             const string Damage = "DAMAGE";
             const string DamageReduction = "DAMAGE REDUCTION";
-            const int Error = -1;
 
-            Console.WriteLine(MsgWarning, Health, minValueOne, maxValueOne);
-            attributeOne = Utility.AssignValueInRange(maxError, minValueOne, maxValueOne);
-            if (attributeOne == Error)
-                attributeOne = minValueOne;
+            attributeOne = PersonalizeAttribute(MsgWarning, Health, minValueOne, maxValueOne, maxError);
+            attributeTwo = PersonalizeAttribute(MsgWarning, Damage, minValueTwo, maxValueTwo, maxError);
+            attributeThree = PersonalizeAttribute(MsgWarning, DamageReduction, minValueThree, maxValueThree, maxError);
 
-            Console.WriteLine(MsgWarning, Damage, minValueTwo, maxValueTwo);
-            attributeTwo = Utility.AssignValueInRange(maxError, minValueTwo, maxValueTwo);
-            if (attributeTwo == Error)
-                attributeTwo = minValueTwo;
-
-            Console.WriteLine(MsgWarning, DamageReduction, minValueThree, maxValueThree);
-            attributeThree = Utility.AssignValueInRange(maxError, minValueThree, maxValueThree);
-            if (attributeThree == Error)
-                attributeThree = minValueThree;
+            Console.WriteLine();
         }
 
         public static void AssignAttributeValue(ref float attributeOne, int minValueOne, int maxValueOne, ref float attributeTwo, int minValueTwo, int maxValueTwo, ref float attributeThree, int minValueThree, int maxValueThree)

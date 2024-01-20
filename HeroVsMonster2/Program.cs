@@ -111,20 +111,37 @@ namespace M03UF2PR1
                             Creation.AssignAttributeValue(ref monsterHealth, MonsterMaxHealth, ref monsterDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMaxDamageReduction);
                             break;
                         case PersonalizedMode:
-                            Console.WriteLine(MsgCreationTurn, archerName);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(DrawArcher);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(MsgCreationTurn + "\n", archerName.ToUpper());
                             Creation.AssignAttributeValue(ref archerHealth, ArcherMinHealth, ArcherMaxHealth, ref archerDamage, ArcherMinDamage, ArcherMaxDamage, ref archerDamageReduction, ArcherMinDamageReduction, ArcherMaxDamageReduction, MaxError);
 
-                            Console.WriteLine(MsgCreationTurn, barbarianName);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(DrawBarbarian);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(MsgCreationTurn + "\n", barbarianName.ToUpper());
                             Creation.AssignAttributeValue(ref barbarianHealth, BarbarianMinHealth, BarbarianMaxHealth, ref barbarianDamage, BarbarianMinDamage, BarbarianMaxDamage, ref barbarianDamageReduction, BarbarianMinDamageReduction, BarbarianMaxDamageReduction, MaxError);
 
-                            Console.WriteLine(MsgCreationTurn, wizardName);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(DrawWizard);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(MsgCreationTurn + "\n", wizardName.ToUpper());
                             Creation.AssignAttributeValue(ref wizardHealth, WizardMinHealth, WizardMaxHealth, ref wizardDamage, WizardMinDamage, WizardMaxDamage, ref wizardDamageReduction, WizardMinDamageReduction, WizardMaxDamageReduction, MaxError);
 
-                            Console.WriteLine(MsgCreationTurn, druidName);
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(DrawDruid);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(MsgCreationTurn + "\n", druidName.ToUpper());
                             Creation.AssignAttributeValue(ref druidHealth, DruidMinHealth, DruidMaxHealth, ref druidDamage, DruidMinDamage, DruidMaxDamage, ref druidDamageReduction, DruidMinDamageReduction, DruidMaxDamageReduction, MaxError);
 
-                            Console.WriteLine(MsgCreationTurn, MonsterName);
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.WriteLine(DrawMonster);
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine(MsgCreationTurn + "\n", MonsterName.ToUpper());
                             Creation.AssignAttributeValue(ref monsterHealth, MonsterMinHealth, MonsterMaxHealth, ref monsterDamage, MonsterMinDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMinDamageReduction, MonsterMaxDamageReduction, MaxError);
+
+                            Console.Clear();
                             break;
                         case RandomMode:
                             Creation.AssignAttributeValue(ref archerHealth, ArcherMinHealth, ArcherMaxHealth, ref archerDamage, ArcherMinDamage, ArcherMaxDamage, ref archerDamageReduction, ArcherMinDamageReduction, ArcherMaxDamageReduction);
