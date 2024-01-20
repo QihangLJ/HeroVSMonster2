@@ -110,5 +110,12 @@ namespace BattleFunctions
             Console.WriteLine(MsgFailed);
             return heroDamage - heroDamage;
         }
+
+        public static float HeroDamageProbabilities(float heroAssignedDamage)
+        //Devuelve el valor del daño, que puede ser o critico (doble de daño), o falla (no hace daño) o un golpe normal (daño assignado).
+        {
+            const int CriticalPercentage = 10, FailedPercentage = 5;
+            return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
+        }
     }
 }
