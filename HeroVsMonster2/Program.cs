@@ -41,18 +41,16 @@ namespace M03UF2PR1
 
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
-                wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
-                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
-                heroAttackDamage;
-
+                  wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
+                  monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
+                  heroAttackDamage;
             int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
             bool inGame = true, ExitHeroTurn = false;
-
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
             string[] heroesNameArray, battleTurnOrder;
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
-            int[] finalPointArray = { 1, 1, 1, 1 }; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
+            int[] finalPointArray = [1, 1, 1, 1]; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
@@ -178,10 +176,12 @@ namespace M03UF2PR1
                                                             archerCooldownCount = roundCount + AbilityEffectCooldown;
                                                             Console.WriteLine(MsgArcherAbility, heroesNameArray[j].ToUpper());
                                                             break;
+
                                                         case BarbarianPosition: //barbarian ability
                                                             barbarianCooldownCount = roundCount + AbilityEffectCooldown;
                                                             Console.WriteLine(MsgBarbarianAbility, heroesNameArray[j].ToUpper());
                                                             break;
+
                                                         case WizardPosition: //Wizard ability 
                                                             heroesDamageArray[j] *= TripleDamage;
                                                             Console.WriteLine(MsgWizardAbility, heroesNameArray[j].ToUpper());
@@ -189,6 +189,7 @@ namespace M03UF2PR1
                                                             Print.ShowAttackInformation(heroesNameArray[j], heroesDamageArray[j], MonsterName, monsterHealth, monsterDamageReduction);
                                                             heroesDamageArray[j] = wizardDamage;
                                                             break;
+
                                                         case DruidPosition: //Druid ability
                                                             for (int k = 0; k < heroesHealthArray.Length; k++)
                                                             {

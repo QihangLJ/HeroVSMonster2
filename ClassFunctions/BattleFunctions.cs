@@ -10,7 +10,7 @@ namespace BattleFunctions
             const int OFFSET = 1, min = 0;
             int randomTurn;
             string[] randomList = Utility.CopyStringArray(nameArray);
-            Random heroSelector = new Random();
+            Random heroSelector = new();
 
             for (int i = randomList.Length - OFFSET; i > min; i--)
             {
