@@ -86,5 +86,12 @@ namespace BattleFunctions
             const int Percentage = 100;
             return defensorHealth - (attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
         }
+
+        public static float Protection(float userDamageReduction)
+        //Duplica la reduccion de daño en caso de que el personaje se proteja.
+        {
+            const int duplicate = 2;
+            return userDamageReduction * duplicate;
+        }
     }
 }
