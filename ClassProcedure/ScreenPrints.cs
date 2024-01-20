@@ -8,27 +8,41 @@ namespace MessagePrints
         public static void MenuGame()
         //Muestra el menu del juego.
         {
-            const string MsgMenu = "Welcome to Hero VS Monster 2: \n1.Start a new battle \n0.Exit";
-            Console.WriteLine(MsgMenu);
+            const string MsgMenu = "Welcome to hero vs monster 2:";
+            const string MsgOptions = "1.Start a new battle \n0.Exit";
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(MsgMenu.ToUpper());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(MsgOptions);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
         }
 
         public static void MenuGameDifficulty()
         //Muestra el menu de modos de juego o digicultades del juego.
         {
-            const string MsgFirstDifficulty = "1.Easy";
-            const string MsgSecondDifficulty = "2.Difficult";
-            const string MsgThirdDifficulty = "3.Personalized";
-            const string MsgFourthDifficulty = "4.Random";
+            const string MsgMenuDifficulty = "Choose the game mode:";
+            const string MsgOptions = "1.Easy \n2.Difficult \n3.Personalized \n4.Random";
 
-            Console.WriteLine($"{MsgFirstDifficulty} \n{MsgSecondDifficulty} \n{MsgThirdDifficulty} \n{MsgFourthDifficulty}");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(MsgMenuDifficulty.ToUpper());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(MsgOptions);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
         }
 
         public static void ShowRoundCounter(ref int round)
         //Muestra un contador al inicio de cada ronda, que va aumentando segun las rondas que vaya pasando.
         {
-            const string MsgWarning = "It's round: {0}";
+            const string MsgWarning = "Round: {0}";
             round++;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine(MsgWarning.ToUpper(), round);
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
         public static void PrintHealthMessage(float[] healthArray, string[] nameArray)
@@ -41,10 +55,12 @@ namespace MessagePrints
             {
                 if (Battle.CheckIsDead(healthArray[i]))
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(MsgDead, nameArray[i].ToUpper());
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine(MsgSituation, nameArray[i].ToUpper(), healthArray[i]);
                 }
             }
@@ -58,18 +74,27 @@ namespace MessagePrints
             float[] DescendantHealthSort = Battle.SortCharacterDescendant(healthArray);
             string[] DescendantNameSort = Battle.SortCharacterDescendant(healthArray, nameArray);
 
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(MsgBattleSituation.ToUpper());
-
             PrintHealthMessage(DescendantHealthSort, DescendantNameSort);
+            Console.WriteLine();
         }
 
         public static int BattleAction(string name)
         //Muestra y pide al usuario introducir una opcion valida para seguir con las acciones del juego.
         {
-            const string MsgToUser = "Select the action for {0}: \n1. Attack \n2. Protect \n3. Special ability";
+            const string MsgToUser = "Select the action for";
+            const string MsgOptions = "1. Attack \n2. Protect \n3. Special ability";
             const int maxError = 3, minOption = 1, maxOption = 3;
 
-            Console.WriteLine(MsgToUser, name.ToUpper());
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(MsgToUser.ToUpper() + " ");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(name.ToUpper());
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(MsgOptions);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
 
             return Utility.AssignValueInRange(maxError, minOption, maxOption);
         }
@@ -82,9 +107,42 @@ namespace MessagePrints
             const string MsgRemainingLife = "The Remaining life of {0}: {1} HP";
             const int Percentage = 100;
 
-            Console.WriteLine(MsgCausedDmg, attackerName, defensorName, attackerDamage);
-            Console.WriteLine(MsgReceiveDmg, defensorName, attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
-            Console.WriteLine(MsgRemainingLife, defensorName, defensorHealth);
+            Console.WriteLine(MsgCausedDmg, attackerName.ToUpper(), defensorName.ToUpper(), attackerDamage);
+            Console.WriteLine(MsgReceiveDmg, defensorName.ToUpper(), attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
+            Console.WriteLine(MsgRemainingLife, defensorName.ToUpper(), defensorHealth);
+        }
+
+        public static void CleanAndPrintTitle(string print)
+        //Limpia el contenido de la consola y instantaneamente muestra un mensaje.
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(print);
+            Console.ResetColor();
+        }
+
+        public static void ViewCharacterStats(string role, string name, float health, float damage, float damageRed)
+        //Muestra las estadisticas del personaje.
+        {
+            const string MsgStats = "ROLE: {0}  /  NAME: {1}  /  HEALTH: {2}  /  DAMAGE: {3}  /  DAMAGE REDUCTION: {4}";
+            Console.WriteLine(MsgStats, role, name, health, damage, damageRed);
+        }
+
+        public static void ViewHeroesStats(string[] role, string[] name, float[] health, float[] damage, float[] damageRed)
+        //Muestra las estadisticas de todos los heroes.
+        {
+            const int Null = 0;
+            for (int i = 0; i < role.Length; i++)
+            {
+                if (Battle.CheckIsDead(health[i]))
+                {
+                    ViewCharacterStats(role[i], name[i], Null, Null, Null);
+                }
+                else
+                {
+                    ViewCharacterStats(role[i], name[i], health[i], damage[i], damageRed[i]);
+                }
+            }
         }
     }
 }

@@ -39,6 +39,13 @@ namespace M03UF2PR1
             const string MsgWizardAbility = "{0} attacks with fire ball!";
             const string MsgDruidAbility = "{0} heals everyone for 500 more life points!";
 
+            const string DrawGameTitle = "██████████████████████████████████████████████████████\r\n██╔╗█╔╗████████╔╗██╔╦═══╗╔═╗╔═╗████████╔╗██████╔═══╗██\r\n██║║█║║████████║╚╗╔╝║╔═╗║║║╚╝║║███████╔╝╚╗█████║╔═╗║██\r\n██║╚═╝╠══╦═╦══╗╚╗║║╔╣╚══╗║╔╗╔╗╠══╦═╗╔═╩╗╔╬══╦═╗╚╝╔╝║██\r\n██║╔═╗║║═╣╔╣╔╗║█║╚╝║╚══╗║║║║║║║╔╗║╔╗╣══╣║║║═╣╔╝╔═╝╔╝██\r\n██║║█║║║═╣║║╚╝║█╚╗╔╝║╚═╝║║║║║║║╚╝║║║╠══║╚╣║═╣║█║║╚═╗██\r\n██╚╝█╚╩══╩╝╚══╝██╚╝█╚═══╝╚╝╚╝╚╩══╩╝╚╩══╩═╩══╩╝█╚═══╝██\r\n██████████████████████████████████████████████████████\r\n";
+            const string DrawArcher = "████╔╗███████\r\n████║╚╗██████\r\n║███║█╚═╗█═╗█\r\n╠═══╬═══╬══╬═\r\n║███║█╔═╝█═╝█\r\n████║╔╝██████\r\n████╚╝███████\r\n";
+            const string DrawBarbarian = "█████╔═════╗█\r\n█████║███╔═╩╗\r\n█████║█╔═╝██║\r\n████╔╩═╬╗███║\r\n█╔══╝╔═╝╚═══╝\r\n╔╝╔══╝███████\r\n╚═╝██████████\r\n";
+            const string DrawWizard = "██████║██████\r\n█████╔╩╗█████\r\n████╔╝█╚╗████\r\n█╔═╦╝███╚╦═╗█\r\n╔╝█╚═════╝█╚╗\r\n╚╗█████████╔╝\r\n█╚═════════╝█\r\n";
+            const string DrawDruid = "████╔═════╗██\r\n██╔═╝█████╚╗█\r\n█╔╝██╔══╗██║█\r\n█║█╔═╝█═╝██║█\r\n█║█╚╗█████╔╝█\r\n█╚╗█╚═════╝██\r\n██║██████████\r\n";
+            const string DrawMonster = "╔╗█████████╔╗\r\n╚╬═╗█████╔═╬╝\r\n█╚╦╩══╦══╩╦╝█\r\n██║███║███║██\r\n██║╔══╩══╗║██\r\n██║╚═════╝║██\r\n██╚═══════╝██\r\n";
+            const string DrawLine = "--------------------------------------------------------";
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
                   wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
@@ -48,16 +55,21 @@ namespace M03UF2PR1
             bool inGame, ExitHeroTurn;
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
-            string[] heroesNameArray, battleTurnOrder;
+            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["Archer", "Barbarian", "Wizard", "Druid"],
+                     arrayDraw = [DrawArcher, DrawBarbarian, DrawWizard, DrawDruid];
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
             int[] finalPointArray; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
-            //El menu del juego para que el usuario escog lo que quiere hacer.
+            Print.CleanAndPrintTitle(DrawGameTitle); //Titulo del juego.
+
+            //El menu del juego para que el usuario escoga lo que quiere hacer.
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
 
             while (userSelection > ExitGame)
             {
+                Print.CleanAndPrintTitle(DrawGameTitle);
+
                 //Iniciamos todas las variables que necessiten reiniciarse antes de una partida.
                 roundCount = 0;
                 inGame = true;
@@ -68,9 +80,13 @@ namespace M03UF2PR1
                 nameInput = Utility.EnterCharacterNames();
                 Utility.AssignNameWithString(nameInput, ref archerName, ref barbarianName, ref wizardName, ref druidName);
 
+                Print.CleanAndPrintTitle(DrawGameTitle);
+
                 //Selecionamos el modo de juego o la dificultad que queremos jugar.
                 Print.MenuGameDifficulty();
                 userSelection = Utility.AssignValueInRange(MaxError, EasyMode, RandomMode);
+
+                Console.Clear();
 
                 if (userSelection != Error)
                 {
@@ -128,6 +144,12 @@ namespace M03UF2PR1
 
                     while (inGame)
                     {
+                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Print.ViewHeroesStats(heroesRoles, heroesNameArray, heroesHealthArray, heroesDamageArray, heroesDmgRedArray);
+                        Print.ViewCharacterStats(MonsterName, MonsterName, monsterHealth, monsterDamage, monsterDamageReduction);
+                        Console.WriteLine();
+
                         //Muestra un contador de rondas al inicio de cada ronda.
                         Print.ShowRoundCounter(ref roundCount);
 
@@ -143,14 +165,24 @@ namespace M03UF2PR1
                                 //"heroesNameArray" siempre esta ordenado para poder encajar con los datos de los atributos, buscamos la direccion de los datos a traves del nombre.
                                 if (battleTurnOrder[i] == heroesNameArray[j])
                                 {
-                                    if (Battle.CheckIsDead(heroesHealthArray[i]))
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine(arrayDraw[j]); //Mostrar el icono del personaje.
+                                    if (Battle.CheckIsDead(heroesHealthArray[j]))
                                     {
-                                        Console.WriteLine(MsgIsDead, heroesNameArray[i]);
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                                        Console.WriteLine(MsgIsDead, heroesNameArray[j].ToUpper());
+                                        Console.WriteLine();
+
+                                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                                        Console.WriteLine(DrawLine);
                                     }
                                     else
                                     {
                                         //Pedimos al usuario una accion para nuestro personaje.
                                         action = Print.BattleAction(heroesNameArray[j]);
+
+                                        Console.WriteLine();
+                                        Console.ForegroundColor = ConsoleColor.DarkGray;
 
                                         switch (action)
                                         {
@@ -213,11 +245,15 @@ namespace M03UF2PR1
                                                 Console.WriteLine(MsgNextTurn);
                                                 break;
                                         }
+                                        Console.WriteLine();
+                                        Console.WriteLine(DrawLine);
                                     }
-                                    //Comprueba si el mosntruo ha sido eliminado o no.
+                                    //Comprueba si el monstruo ha sido eliminado o no.
                                     if (Battle.CheckIsDead(monsterHealth))
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine(MsgHeroesVictory);
+                                        Console.WriteLine();
                                         ExitHeroTurn = true;
                                     }
                                 }
@@ -241,6 +277,9 @@ namespace M03UF2PR1
                             //Si la arquera usa su habilidad, deja sin atacar al monstruo durante 2 rondas.
                             if (roundCount >= archerCooldownCount)
                             {
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine(DrawMonster);
+
                                 //El monstruo ataca a los heroes y muestra el daño que les han causado (por el orden de arquera, barbaro, mago, druida).
                                 heroesHealthArray = Battle.MonsterAttack(monsterDamage, heroesNameArray, heroesHealthArray, heroesDmgRedArray);
 
@@ -249,30 +288,35 @@ namespace M03UF2PR1
 
                                 if (Battle.CheckDefeat(heroesHealthArray))
                                 {
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Console.WriteLine(DrawLine);
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(MsgMonsterVictory);
+                                    Console.WriteLine();
                                     inGame = false;
                                 }
                             }
 
                             //Para reiniciar otra vez el atributo de reduccion de daño de los heroes, para los que se han protegido.
                             heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
-
-                            //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
-                            Utility.CleanTheScreen();
                         }
+                        //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
+                        Utility.CleanTheScreen();
                     }
+                    Print.CleanAndPrintTitle(DrawGameTitle);
 
                     //Volvemos a preguntar al usuario si quiere volver a jugar.
                     Print.MenuGame();
                     userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
-
                 }
             }
 
             if (userSelection == Error)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(MsgErrorInput);
             }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(MsgExit);
         }
     }

@@ -99,7 +99,9 @@ namespace BattleFunctions
         {
             const string MsgCritical = "CRITICAL ATTACK!";
             const float Double = 2;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(MsgCritical);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             return heroDamage * Double;
         }
 
@@ -107,7 +109,9 @@ namespace BattleFunctions
         //Avisa y devuelve 0 ya que el heroe fallo el ataque.
         {
             const string MsgFailed = "FAILED THE ATTACK!";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(MsgFailed);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             return heroDamage - heroDamage;
         }
 
@@ -127,12 +131,28 @@ namespace BattleFunctions
         public static float[] MonsterAttack(float monsterDmg, string[] nameArray, float[] healthArray, float[] dmgRedArray)
         //Ataca a todos los personajes por igual, utilizando los arrays de atributos.
         {
+            const string MsgMonsterAtatck = "Monster attack:";
             const string MsgAttackTo = "{0} recieve {1} DMG by the Monster.";
+            const string MsgDead = "{0} is already DEAD.";
+
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(MsgMonsterAtatck.ToUpper());
+
             for (int i = 0; i < nameArray.Length; i++)
             {
-                Console.WriteLine(MsgAttackTo, nameArray[i], healthArray[i] - Attacked(monsterDmg, healthArray[i], dmgRedArray[i]));
-                healthArray[i] = Attacked(monsterDmg, healthArray[i], dmgRedArray[i]);
+                if (!CheckIsDead(healthArray[i]))
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine(MsgAttackTo, nameArray[i].ToUpper(), healthArray[i] - Attacked(monsterDmg, healthArray[i], dmgRedArray[i]));
+                    healthArray[i] = Attacked(monsterDmg, healthArray[i], dmgRedArray[i]);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(MsgDead, nameArray[i].ToUpper());
+                }
             }
+            Console.WriteLine();
             return healthArray;
         }
     }
