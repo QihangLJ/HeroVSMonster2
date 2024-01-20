@@ -13,30 +13,47 @@ namespace M03UF2PR1
             const int StartGame = 1, ExitGame = 0, MaxError = 3, Error = -1, OFFSET = 1, SpecialAbilityCooldown = 5, AbilityEffectCooldown = 2,
                       FullDamageReduction = 100, TripleDamage = 3, Healing = 500;
 
-            const int EasyMode = 1, DifficultMode = 2, PersonalizedMode = 3, RandomMode = 4, ArcherPosition = 0, BarbarianPosition = 1, WizardPosition = 2, DruidPosition = 3;
+            const int EasyMode = 1, DifficultMode = 2, PersonalizedMode = 3, RandomMode = 4, ArcherPosition = 0, BarbarianPosition = 1, WizardPosition = 2, DruidPosition = 3,
+                      Attack = 1, Defense = 2, Ability = 3;
 
             const int ArcherMinHealth = 1500, ArcherMaxHealth = 2000, ArcherMinDamage = 200, ArcherMaxDamage = 300, ArcherMinDamageReduction = 25, ArcherMaxDamageReduction = 35,
                       BarbarianMinHealth = 3000, BarbarianMaxHealth = 3750, BarbarianMinDamage = 150, BarbarianMaxDamage = 250, BarbarianMinDamageReduction = 35, BarbarianMaxDamageReduction = 45,
                       WizardMinHealth = 1100, WizardMaxHealth = 1500, WizardMinDamage = 300, WizardMaxDamage = 400, WizardMinDamageReduction = 20, WizardMaxDamageReduction = 35,
                       DruidMinHealth = 2000, DruidMaxHealth = 2500, DruidMinDamage = 70, DruidMaxDamage = 120, DruidMinDamageReduction = 25, DruidMaxDamageReduction = 40,
                       MonsterMinHealth = 7000, MonsterMaxHealth = 10000, MonsterMinDamage = 300, MonsterMaxDamage = 400, MonsterMinDamageReduction = 20, MonsterMaxDamageReduction = 30;
-            
+
             const string MonsterName = "Monster";
             const string MsgCreationTurn = "{0} Creation...";
+            const string MsgCooldown = "It's on cooldown, wait {0} rounds more.";
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
+            const string MsgProtect = "{0} use protection, his Damage Reduction increases double.";
+            const string MsgNextTurn = "The character didn't do anything!";
+            const string MsgIsDead = "{0} is dead!";
+
+            const string MsgHeroesVictory = "CONGRATULATIONS THE MONSTER HAS BEEN DEFEATED BY THE HEROES!";
+            const string MsgMonsterVictory = "OH! ALL THE HEROES HAS BEEN DEFEATED BY THE MONSTER!";
+
+            const string MsgArcherAbility = "The monster was KNOCKED OUT by {0}!";
+            const string MsgBarbarianAbility = "{0} have full damage reduction for 2 rounds!";
+            const string MsgWizardAbility = "{0} attacks with fire ball!";
+            const string MsgDruidAbility = "{0} heals everyone for 500 more life points!";
+
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
                 wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
-                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0;
+                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
+                heroAttackDamage;
 
-            int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0;
-            
+            int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
+            bool inGame = true, ExitHeroTurn = false;
+
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
             string[] heroesNameArray, battleTurnOrder;
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
-            
+            int[] finalPointArray = { 1, 1, 1, 1 }; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
+
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
             
@@ -112,6 +129,138 @@ namespace M03UF2PR1
                     heroesDamageArray = Creation.CreateFloatArray(archerDamage, barbarianDamage, wizardDamage, druidDamage);
                     heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
 
+                    while (inGame)
+                    {
+                        //Muestra un contador de rondas al inicio de cada ronda.
+                        Print.ShowRoundCounter(ref roundCount);
+
+                        //La maquina decide de forma aleatoria el orden de los turnos de cada heroe.
+                        battleTurnOrder = Battle.RandomOrderBattle(heroesNameArray);
+
+                        //Empieza el turno de los heroes.
+                        int i = 0;
+                        while (i < battleTurnOrder.Length && !ExitHeroTurn)
+                        {
+                            for (int j = 0; j < heroesNameArray.Length; j++)
+                            {
+                                //"heroesNameArray" siempre esta ordenado para poder encajar con los datos de los atributos, buscamos la direccion de los datos a traves del nombre.
+                                if (battleTurnOrder[i] == heroesNameArray[j])
+                                {
+                                    if (Battle.CheckIsDead(heroesHealthArray[i]))
+                                    {
+                                        Console.WriteLine(MsgIsDead, heroesNameArray[i]);
+                                    }
+                                    else
+                                    {
+                                        //Pedimos al usuario una accion para nuestro personaje.
+                                        action = Print.BattleAction(heroesNameArray[j]);
+
+                                        switch (action)
+                                        {
+                                            case Attack:
+                                                heroAttackDamage = Battle.HeroDamageProbabilities(heroesDamageArray[j]);
+                                                monsterHealth = Battle.Attacked(heroAttackDamage, monsterHealth, monsterDamageReduction);
+                                                Print.ShowAttackInformation(heroesNameArray[j], heroAttackDamage, MonsterName, monsterHealth, monsterDamageReduction);
+                                                break;
+
+                                            case Defense:
+                                                heroesDmgRedArray[j] = Battle.Protection(heroesDmgRedArray[j]);
+                                                Console.WriteLine(MsgProtect, heroesNameArray[j]);
+                                                break;
+
+                                            case Ability:
+                                                //Si han pasado los 5 turnos despues de utilizar la habiulidad, podra volver a usarla.
+                                                if (Battle.CheckCooldown(roundCount, finalPointArray[j]))
+                                                {
+                                                    switch (j)
+                                                    {
+                                                        case ArcherPosition: //Archer ability
+                                                            archerCooldownCount = roundCount + AbilityEffectCooldown;
+                                                            Console.WriteLine(MsgArcherAbility, heroesNameArray[j].ToUpper());
+                                                            break;
+                                                        case BarbarianPosition: //barbarian ability
+                                                            barbarianCooldownCount = roundCount + AbilityEffectCooldown;
+                                                            Console.WriteLine(MsgBarbarianAbility, heroesNameArray[j].ToUpper());
+                                                            break;
+                                                        case WizardPosition: //Wizard ability 
+                                                            heroesDamageArray[j] *= TripleDamage;
+                                                            Console.WriteLine(MsgWizardAbility, heroesNameArray[j].ToUpper());
+                                                            monsterHealth = Battle.Attacked(heroesDamageArray[j], monsterHealth, monsterDamageReduction);
+                                                            Print.ShowAttackInformation(heroesNameArray[j], heroesDamageArray[j], MonsterName, monsterHealth, monsterDamageReduction);
+                                                            heroesDamageArray[j] = wizardDamage;
+                                                            break;
+                                                        case DruidPosition: //Druid ability
+                                                            for (int k = 0; k < heroesHealthArray.Length; k++)
+                                                            {
+                                                                if(heroesHealthArray[k] > 0)
+                                                                {
+                                                                    heroesHealthArray[k] += Healing;
+                                                                }
+                                                            }
+                                                            Console.WriteLine(MsgDruidAbility, heroesNameArray[j].ToUpper());
+                                                            break;
+                                                    }
+                                                    //Assignamos hasta que ronda tiene que esperar para poder volver a usar la habiliad.
+                                                    finalPointArray[j] = roundCount + SpecialAbilityCooldown + OFFSET;
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine(MsgCooldown, finalPointArray[j] - roundCount);
+                                                }
+                                                break;
+
+                                            default:
+                                                Console.WriteLine(MsgNextTurn);
+                                                break;
+                                        }
+                                    }
+                                    //Comprueba si el mosntruo ha sido eliminado o no.
+                                    if (Battle.CheckIsDead(monsterHealth))
+                                    {
+                                        Console.WriteLine(MsgHeroesVictory);
+                                        ExitHeroTurn = true;
+                                    }
+                                }
+                            }
+                            i++;
+                        }
+
+                        //Vuelve a comprobar si el monstruo esta vivo para ejecutar el turno del mosntruo si siguiera vivo..
+                        if (Battle.CheckIsDead(monsterHealth))
+                        {
+                            inGame = false;
+                        }
+                        else
+                        {
+                            //Al utilizar la habilidad del barbaro, se activara si estamos dentro de las 2 rondas que dura la habilidad y antes de que ataque el mosntruo.
+                            if (roundCount < barbarianCooldownCount)
+                            {
+                                heroesDmgRedArray[BarbarianPosition] = FullDamageReduction;
+                            }
+
+                            //Si la arquera usa su habilidad, deja sin atacar al monstruo durante 2 rondas.
+                            if (roundCount >= archerCooldownCount)
+                            {
+                                //El monstruo ataca a los heroes y muestra el daño que les han causado (por el orden de arquera, barbaro, mago, druida).
+                                heroesHealthArray = Battle.MonsterAttack(monsterDamage, heroesNameArray, heroesHealthArray, heroesDmgRedArray);
+
+                                //Muestra la salud de los heroes de forma descendiente.
+                                Print.ShowSortedHealth(heroesHealthArray, heroesNameArray);
+
+                                if (Battle.CheckDefeat(heroesHealthArray))
+                                {
+                                    Console.WriteLine(MsgMonsterVictory);
+                                    inGame = false;
+                                }
+                            }
+
+                            //Para reiniciar otra vez el atributo de reduccion de daño de los heroes, para los que se han protegido.
+                            heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
+
+                            //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
+                            Utility.CleanTheScreen();
+                        }
+                    }
                 }
             }
             else
