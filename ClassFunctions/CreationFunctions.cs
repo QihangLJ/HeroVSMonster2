@@ -50,15 +50,13 @@ namespace CreationFunctions
         public static float[] CreateFloatArray(float valueOne, float valueTwo, float valueThree, float valueFour)
         //Crea una array con la vida de los heroes.
         {
-            float[] valuesArray = { valueOne, valueTwo, valueThree, valueFour };
-            return valuesArray;
+            return [valueOne, valueTwo, valueThree, valueFour];
         }
 
         public static string[] CreateStringArray(string nameOne, string nameTwo, string nameThree, string nameFour)
         //Crea una array con los nombres de los heroes.
         {
-            string[] nameArray = { nameOne, nameTwo, nameThree, nameFour };
-            return nameArray;
+            return [nameOne, nameTwo, nameThree, nameFour];
         }
     }
 }
