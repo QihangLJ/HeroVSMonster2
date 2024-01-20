@@ -55,7 +55,8 @@ namespace M03UF2PR1
             bool inGame, ExitHeroTurn;
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
-            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["Archer", "Barbarian", "Wizard", "Druid"];
+            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["Archer", "Barbarian", "Wizard", "Druid"],
+                     arrayDraw = [DrawArcher, DrawBarbarian, DrawWizard, DrawDruid];
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
             int[] finalPointArray; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
@@ -164,10 +165,12 @@ namespace M03UF2PR1
                                 //"heroesNameArray" siempre esta ordenado para poder encajar con los datos de los atributos, buscamos la direccion de los datos a traves del nombre.
                                 if (battleTurnOrder[i] == heroesNameArray[j])
                                 {
-                                    if (Battle.CheckIsDead(heroesHealthArray[i]))
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine(arrayDraw[j]); //Mostrar el icono del personaje.
+                                    if (Battle.CheckIsDead(heroesHealthArray[j]))
                                     {
                                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine(MsgIsDead, heroesNameArray[i].ToUpper());
+                                        Console.WriteLine(MsgIsDead, heroesNameArray[j].ToUpper());
                                         Console.WriteLine();
 
                                         Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -274,6 +277,9 @@ namespace M03UF2PR1
                             //Si la arquera usa su habilidad, deja sin atacar al monstruo durante 2 rondas.
                             if (roundCount >= archerCooldownCount)
                             {
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine(DrawMonster);
+
                                 //El monstruo ataca a los heroes y muestra el daño que les han causado (por el orden de arquera, barbaro, mago, druida).
                                 heroesHealthArray = Battle.MonsterAttack(monsterDamage, heroesNameArray, heroesHealthArray, heroesDmgRedArray);
 
