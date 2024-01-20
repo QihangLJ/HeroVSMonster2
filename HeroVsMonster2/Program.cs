@@ -45,6 +45,7 @@ namespace M03UF2PR1
             const string DrawWizard = "██████║██████\r\n█████╔╩╗█████\r\n████╔╝█╚╗████\r\n█╔═╦╝███╚╦═╗█\r\n╔╝█╚═════╝█╚╗\r\n╚╗█████████╔╝\r\n█╚═════════╝█\r\n";
             const string DrawDruid = "████╔═════╗██\r\n██╔═╝█████╚╗█\r\n█╔╝██╔══╗██║█\r\n█║█╔═╝█═╝██║█\r\n█║█╚╗█████╔╝█\r\n█╚╗█╚═════╝██\r\n██║██████████\r\n";
             const string DrawMonster = "╔╗█████████╔╗\r\n╚╬═╗█████╔═╬╝\r\n█╚╦╩══╦══╩╦╝█\r\n██║███║███║██\r\n██║╔══╩══╗║██\r\n██║╚═════╝║██\r\n██╚═══════╝██\r\n";
+            const string DrawLine = "--------------------------------------------------------";
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
                   wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
@@ -64,10 +65,10 @@ namespace M03UF2PR1
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
 
-            Print.CleanAndPrintTitle(DrawGameTitle);
-
             while (userSelection > ExitGame)
             {
+                Print.CleanAndPrintTitle(DrawGameTitle);
+
                 //Iniciamos todas las variables que necessiten reiniciarse antes de una partida.
                 roundCount = 0;
                 inGame = true;
@@ -142,7 +143,11 @@ namespace M03UF2PR1
 
                     while (inGame)
                     {
+                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Print.ViewHeroesStats(heroesRoles, heroesNameArray, heroesHealthArray, heroesDamageArray, heroesDmgRedArray);
+                        Print.ViewCharacterStats(MonsterName, MonsterName, monsterHealth, monsterDamage, monsterDamageReduction);
+                        Console.WriteLine();
 
                         //Muestra un contador de rondas al inicio de cada ronda.
                         Print.ShowRoundCounter(ref roundCount);
@@ -161,12 +166,20 @@ namespace M03UF2PR1
                                 {
                                     if (Battle.CheckIsDead(heroesHealthArray[i]))
                                     {
-                                        Console.WriteLine(MsgIsDead, heroesNameArray[i]);
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                                        Console.WriteLine(MsgIsDead, heroesNameArray[i].ToUpper());
+                                        Console.WriteLine();
+
+                                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                                        Console.WriteLine(DrawLine);
                                     }
                                     else
                                     {
                                         //Pedimos al usuario una accion para nuestro personaje.
                                         action = Print.BattleAction(heroesNameArray[j]);
+
+                                        Console.WriteLine();
+                                        Console.ForegroundColor = ConsoleColor.DarkGray;
 
                                         switch (action)
                                         {
@@ -229,10 +242,13 @@ namespace M03UF2PR1
                                                 Console.WriteLine(MsgNextTurn);
                                                 break;
                                         }
+                                        Console.WriteLine();
+                                        Console.WriteLine(DrawLine);
                                     }
-                                    //Comprueba si el mosntruo ha sido eliminado o no.
+                                    //Comprueba si el monstruo ha sido eliminado o no.
                                     if (Battle.CheckIsDead(monsterHealth))
                                     {
+                                        Console.BackgroundColor = ConsoleColor.Green;
                                         Console.WriteLine(MsgHeroesVictory);
                                         ExitHeroTurn = true;
                                     }
@@ -265,6 +281,7 @@ namespace M03UF2PR1
 
                                 if (Battle.CheckDefeat(heroesHealthArray))
                                 {
+                                    Console.BackgroundColor = ConsoleColor.Red;
                                     Console.WriteLine(MsgMonsterVictory);
                                     inGame = false;
                                 }

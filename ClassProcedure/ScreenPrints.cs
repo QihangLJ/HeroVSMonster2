@@ -36,7 +36,7 @@ namespace MessagePrints
         public static void ShowRoundCounter(ref int round)
         //Muestra un contador al inicio de cada ronda, que va aumentando segun las rondas que vaya pasando.
         {
-            const string MsgWarning = "It's round: {0}";
+            const string MsgWarning = "Round: {0}";
             round++;
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -60,7 +60,7 @@ namespace MessagePrints
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine(MsgSituation, nameArray[i].ToUpper(), healthArray[i]);
                 }
             }
@@ -74,11 +74,10 @@ namespace MessagePrints
             float[] DescendantHealthSort = Battle.SortCharacterDescendant(healthArray);
             string[] DescendantNameSort = Battle.SortCharacterDescendant(healthArray, nameArray);
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(MsgBattleSituation.ToUpper());
-            Console.WriteLine();
-
             PrintHealthMessage(DescendantHealthSort, DescendantNameSort);
+            Console.WriteLine();
         }
 
         public static int BattleAction(string name)
@@ -108,12 +107,9 @@ namespace MessagePrints
             const string MsgRemainingLife = "The Remaining life of {0}: {1} HP";
             const int Percentage = 100;
 
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(MsgCausedDmg, attackerName, defensorName, attackerDamage);
-            Console.WriteLine(MsgReceiveDmg, defensorName, attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
-            Console.WriteLine(MsgRemainingLife, defensorName, defensorHealth);
-            Console.WriteLine();
+            Console.WriteLine(MsgCausedDmg, attackerName.ToUpper(), defensorName.ToUpper(), attackerDamage);
+            Console.WriteLine(MsgReceiveDmg, defensorName.ToUpper(), attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
+            Console.WriteLine(MsgRemainingLife, defensorName.ToUpper(), defensorHealth);
         }
 
         public static void CleanAndPrintTitle(string print)
@@ -128,19 +124,23 @@ namespace MessagePrints
         public static void ViewCharacterStats(string role, string name, float health, float damage, float damageRed)
         {
             const string MsgStats = "ROLE: {0}       NAME: {1}       HEALTH: {2}       DAMAGE: {3}       DAMAGE REDUCTION: {4}";
-            Console.BackgroundColor = ConsoleColor.Cyan;
-            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine(MsgStats, role, name, health, damage, damageRed);
         }
 
         public static void ViewHeroesStats(string[] role, string[] name, float[] health, float[] damage, float[] damageRed)
         {
+            const int Null = 0;
             for (int i = 0; i < role.Length; i++)
             {
-                ViewCharacterStats(role[i], name[i], health[i], damage[i], damageRed[i]);
+                if (Battle.CheckIsDead(health[i]))
+                {
+                    ViewCharacterStats(role[i], name[i], Null, Null, Null);
+                }
+                else
+                {
+                    ViewCharacterStats(role[i], name[i], health[i], damage[i], damageRed[i]);
+                }
             }
-            Console.WriteLine();
         }
-
     }
 }
