@@ -103,5 +103,14 @@
             Random randValue = new Random();
             return randValue.Next(1, 101) <= porcentaje;
         }
+
+        public static void CleanTheScreen()
+        //Permite limpiar la pantalla de la consola pulsando cualquier tecla.
+        {
+            const string MsgWarning = "press any key to continue...";
+            Console.Write(MsgWarning);
+            Console.ReadKey();
+            Console.Clear();
+        }
     }
 }
