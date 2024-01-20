@@ -50,7 +50,7 @@ namespace M03UF2PR1
             
             string[] heroesNameArray, battleTurnOrder;
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
-            int[] finalPointArray = { 1, 1, 1, 1 }; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
+            int[] finalPointArray = [1, 1, 1, 1]; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
@@ -176,10 +176,12 @@ namespace M03UF2PR1
                                                             archerCooldownCount = roundCount + AbilityEffectCooldown;
                                                             Console.WriteLine(MsgArcherAbility, heroesNameArray[j].ToUpper());
                                                             break;
+
                                                         case BarbarianPosition: //barbarian ability
                                                             barbarianCooldownCount = roundCount + AbilityEffectCooldown;
                                                             Console.WriteLine(MsgBarbarianAbility, heroesNameArray[j].ToUpper());
                                                             break;
+
                                                         case WizardPosition: //Wizard ability 
                                                             heroesDamageArray[j] *= TripleDamage;
                                                             Console.WriteLine(MsgWizardAbility, heroesNameArray[j].ToUpper());
@@ -187,6 +189,7 @@ namespace M03UF2PR1
                                                             Print.ShowAttackInformation(heroesNameArray[j], heroesDamageArray[j], MonsterName, monsterHealth, monsterDamageReduction);
                                                             heroesDamageArray[j] = wizardDamage;
                                                             break;
+
                                                         case DruidPosition: //Druid ability
                                                             for (int k = 0; k < heroesHealthArray.Length; k++)
                                                             {
