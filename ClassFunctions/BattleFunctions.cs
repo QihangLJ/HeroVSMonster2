@@ -115,7 +115,7 @@ namespace BattleFunctions
         //Devuelve el valor del daño, que puede ser o critico (doble de daño), o falla (no hace daño) o un golpe normal (daño assignado).
         {
             const int CriticalPercentage = 10, FailedPercentage = 5;
-            return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
+            return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Utility.Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
         }
 
         public static bool CheckCooldown(int inicialRound, int finalRound)
