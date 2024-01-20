@@ -79,5 +79,12 @@ namespace BattleFunctions
             }
             return true;
         }
+
+        public static float Attacked(float attackerDamage, float defensorHealth, float defensorDamageReduction)
+        //Devuelve la vida que le quedaria al personaje que es atacado, despues de haber hecho los calculos con el percentage de reducion de daño.
+        {
+            const int Percentage = 100;
+            return defensorHealth - (attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
+        }
     }
 }
