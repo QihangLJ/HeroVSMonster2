@@ -192,7 +192,10 @@ namespace M03UF2PR1
                                                         case DruidPosition: //Druid ability
                                                             for (int k = 0; k < heroesHealthArray.Length; k++)
                                                             {
-                                                                heroesHealthArray[k] += Healing;
+                                                                if(heroesHealthArray[k] > 0)
+                                                                {
+                                                                    heroesHealthArray[k] += Healing;
+                                                                }
                                                             }
                                                             Console.WriteLine(MsgDruidAbility, heroesNameArray[j].ToUpper());
                                                             break;
