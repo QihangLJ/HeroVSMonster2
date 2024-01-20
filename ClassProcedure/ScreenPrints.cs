@@ -55,10 +55,12 @@ namespace MessagePrints
             {
                 if (Battle.CheckIsDead(healthArray[i]))
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine(MsgDead, nameArray[i].ToUpper());
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(MsgSituation, nameArray[i].ToUpper(), healthArray[i]);
                 }
             }
@@ -72,7 +74,9 @@ namespace MessagePrints
             float[] DescendantHealthSort = Battle.SortCharacterDescendant(healthArray);
             string[] DescendantNameSort = Battle.SortCharacterDescendant(healthArray, nameArray);
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(MsgBattleSituation.ToUpper());
+            Console.WriteLine();
 
             PrintHealthMessage(DescendantHealthSort, DescendantNameSort);
         }
@@ -86,10 +90,9 @@ namespace MessagePrints
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(MsgToUser.ToUpper() + " ");
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine(name.ToUpper());
-
-            Console.ForegroundColor = ConsoleColor.Yellow;          
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(MsgOptions);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
@@ -105,9 +108,12 @@ namespace MessagePrints
             const string MsgRemainingLife = "The Remaining life of {0}: {1} HP";
             const int Percentage = 100;
 
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(MsgCausedDmg, attackerName, defensorName, attackerDamage);
             Console.WriteLine(MsgReceiveDmg, defensorName, attackerDamage - (attackerDamage * (defensorDamageReduction / Percentage)));
             Console.WriteLine(MsgRemainingLife, defensorName, defensorHealth);
+            Console.WriteLine();
         }
 
         public static void CleanAndPrintTitle(string print)

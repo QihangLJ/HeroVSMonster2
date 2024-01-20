@@ -99,6 +99,7 @@ namespace BattleFunctions
         {
             const string MsgCritical = "CRITICAL ATTACK!";
             const float Double = 2;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(MsgCritical);
             return heroDamage * Double;
         }
@@ -107,6 +108,7 @@ namespace BattleFunctions
         //Avisa y devuelve 0 ya que el heroe fallo el ataque.
         {
             const string MsgFailed = "FAILED THE ATTACK!";
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(MsgFailed);
             return heroDamage - heroDamage;
         }
@@ -133,6 +135,7 @@ namespace BattleFunctions
                 Console.WriteLine(MsgAttackTo, nameArray[i], healthArray[i] - Attacked(monsterDmg, healthArray[i], dmgRedArray[i]));
                 healthArray[i] = Attacked(monsterDmg, healthArray[i], dmgRedArray[i]);
             }
+            Console.WriteLine();
             return healthArray;
         }
     }
