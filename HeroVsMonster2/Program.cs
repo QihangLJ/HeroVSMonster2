@@ -13,30 +13,47 @@ namespace M03UF2PR1
             const int StartGame = 1, ExitGame = 0, MaxError = 3, Error = -1, OFFSET = 1, SpecialAbilityCooldown = 5, AbilityEffectCooldown = 2,
                       FullDamageReduction = 100, TripleDamage = 3, Healing = 500;
 
-            const int EasyMode = 1, DifficultMode = 2, PersonalizedMode = 3, RandomMode = 4, ArcherPosition = 0, BarbarianPosition = 1, WizardPosition = 2, DruidPosition = 3;
+            const int EasyMode = 1, DifficultMode = 2, PersonalizedMode = 3, RandomMode = 4, ArcherPosition = 0, BarbarianPosition = 1, WizardPosition = 2, DruidPosition = 3,
+                      Attack = 1, Defense = 2, Ability = 3;
 
             const int ArcherMinHealth = 1500, ArcherMaxHealth = 2000, ArcherMinDamage = 200, ArcherMaxDamage = 300, ArcherMinDamageReduction = 25, ArcherMaxDamageReduction = 35,
                       BarbarianMinHealth = 3000, BarbarianMaxHealth = 3750, BarbarianMinDamage = 150, BarbarianMaxDamage = 250, BarbarianMinDamageReduction = 35, BarbarianMaxDamageReduction = 45,
                       WizardMinHealth = 1100, WizardMaxHealth = 1500, WizardMinDamage = 300, WizardMaxDamage = 400, WizardMinDamageReduction = 20, WizardMaxDamageReduction = 35,
                       DruidMinHealth = 2000, DruidMaxHealth = 2500, DruidMinDamage = 70, DruidMaxDamage = 120, DruidMinDamageReduction = 25, DruidMaxDamageReduction = 40,
                       MonsterMinHealth = 7000, MonsterMaxHealth = 10000, MonsterMinDamage = 300, MonsterMaxDamage = 400, MonsterMinDamageReduction = 20, MonsterMaxDamageReduction = 30;
-            
+
             const string MonsterName = "Monster";
             const string MsgCreationTurn = "{0} Creation...";
+            const string MsgCooldown = "It's on cooldown, wait {0} rounds more.";
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
+            const string MsgProtect = "{0} use protection, his Damage Reduction increases double.";
+            const string MsgNextTurn = "The character didn't do anything!";
+            const string MsgIsDead = "{0} is dead!";
+
+            const string MsgHeroesVictory = "CONGRATULATIONS THE MONSTER HAS BEEN DEFEATED BY THE HEROES!";
+            const string MsgMonsterVictory = "OH! ALL THE HEROES HAS BEEN DEFEATED BY THE MONSTER!";
+
+            const string MsgArcherAbility = "The monster was KNOCKED OUT by {0}!";
+            const string MsgBarbarianAbility = "{0} have full damage reduction for 2 rounds!";
+            const string MsgWizardAbility = "{0} attacks with fire ball!";
+            const string MsgDruidAbility = "{0} heals everyone for 500 more life points!";
+
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
                 wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
-                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0;
+                monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
+                heroAttackDamage;
 
-            int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0;
-            
+            int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
+            bool inGame = true, ExitHeroTurn = false;
+
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
             string[] heroesNameArray, battleTurnOrder;
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
-            
+            int[] finalPointArray = { 1, 1, 1, 1 }; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
+
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
             
