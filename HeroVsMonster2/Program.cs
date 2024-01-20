@@ -55,7 +55,7 @@ namespace M03UF2PR1
             bool inGame, ExitHeroTurn;
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
-            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["ARCH", "BARB", "WIZA", "DRUI"];
+            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["Archer", "Barbarian", "Wizard", "Druid"];
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
             int[] finalPointArray; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
@@ -248,8 +248,9 @@ namespace M03UF2PR1
                                     //Comprueba si el monstruo ha sido eliminado o no.
                                     if (Battle.CheckIsDead(monsterHealth))
                                     {
-                                        Console.BackgroundColor = ConsoleColor.Green;
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine(MsgHeroesVictory);
+                                        Console.WriteLine();
                                         ExitHeroTurn = true;
                                     }
                                 }
@@ -281,31 +282,35 @@ namespace M03UF2PR1
 
                                 if (Battle.CheckDefeat(heroesHealthArray))
                                 {
-                                    Console.BackgroundColor = ConsoleColor.Red;
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Console.WriteLine(DrawLine);
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(MsgMonsterVictory);
+                                    Console.WriteLine();
                                     inGame = false;
                                 }
                             }
 
                             //Para reiniciar otra vez el atributo de reduccion de daño de los heroes, para los que se han protegido.
                             heroesDmgRedArray = Creation.CreateFloatArray(archerDamageReduction, barbarianDamageReduction, wizardDamageReduction, druidDamageReduction);
-
-                            //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
-                            Utility.CleanTheScreen();
                         }
+                        //Pide al usuario pulsar una tecla para limpiar la consola, por si el usuario quiere revisar alguna informacion antes de que se borre todo.
+                        Utility.CleanTheScreen();
                     }
+                    Print.CleanAndPrintTitle(DrawGameTitle);
 
                     //Volvemos a preguntar al usuario si quiere volver a jugar.
                     Print.MenuGame();
                     userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
-
                 }
             }
 
             if (userSelection == Error)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine(MsgErrorInput);
             }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(MsgExit);
         }
     }

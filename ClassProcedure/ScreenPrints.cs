@@ -8,7 +8,7 @@ namespace MessagePrints
         public static void MenuGame()
         //Muestra el menu del juego.
         {
-            const string MsgMenu = "Welcome to hero vs monster 2::";
+            const string MsgMenu = "Welcome to hero vs monster 2:";
             const string MsgOptions = "1.Start a new battle \n0.Exit";
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -122,12 +122,14 @@ namespace MessagePrints
         }
 
         public static void ViewCharacterStats(string role, string name, float health, float damage, float damageRed)
+        //Muestra las estadisticas del personaje.
         {
-            const string MsgStats = "ROLE: {0}       NAME: {1}       HEALTH: {2}       DAMAGE: {3}       DAMAGE REDUCTION: {4}";
+            const string MsgStats = "ROLE: {0}  /  NAME: {1}  /  HEALTH: {2}  /  DAMAGE: {3}  /  DAMAGE REDUCTION: {4}";
             Console.WriteLine(MsgStats, role, name, health, damage, damageRed);
         }
 
         public static void ViewHeroesStats(string[] role, string[] name, float[] health, float[] damage, float[] damageRed)
+        //Muestra las estadisticas de todos los heroes.
         {
             const int Null = 0;
             for (int i = 0; i < role.Length; i++)
