@@ -84,17 +84,29 @@
         public static void ExchangeFloatVariable(ref float valueOne, ref float valueTwo)
         //Intercambia los valores de dos variables FLOAT.
         {
-            float temp = valueOne;
-            valueOne = valueTwo;
-            valueTwo = temp;
+            (valueTwo, valueOne) = (valueOne, valueTwo);
         }
 
         public static void ExchangeStringVariable(ref string valueOne, ref string valueTwo)
         //Intercambia los valores de dos variables STRING.
         {
-            string temp = valueOne;
-            valueOne = valueTwo;
-            valueTwo = temp;
+            (valueTwo, valueOne) = (valueOne, valueTwo);
+        }
+
+        public static bool Probability(int porcentaje)
+        //Devuelve un booleano segun la suerte que hayamos tenido en acertar a la probabilidad.
+        {
+            Random randValue = new();
+            return randValue.Next(1, 101) <= porcentaje;
+        }
+
+        public static void CleanTheScreen()
+        //Permite limpiar la pantalla de la consola pulsando cualquier tecla.
+        {
+            const string MsgWarning = "press any key to continue...";
+            Console.Write(MsgWarning);
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
