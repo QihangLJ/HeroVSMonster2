@@ -91,6 +91,7 @@ namespace MessagePrints
 
             Console.ForegroundColor = ConsoleColor.Yellow;          
             Console.WriteLine(MsgOptions);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine();
 
             return Utility.AssignValueInRange(maxError, minOption, maxOption);

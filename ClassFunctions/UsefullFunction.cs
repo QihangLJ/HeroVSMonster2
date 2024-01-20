@@ -29,6 +29,7 @@
                     errorAttempts++;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(MsgError.ToUpper());
+                    Console.ForegroundColor = ConsoleColor.Green;
                 }
             }
             //En caso de fallar 3 veces, devolvera -1 (ExhaustedAttemtps) indicando que el usuario se quedo sin intentos.
@@ -110,6 +111,7 @@
         //Permite limpiar la pantalla de la consola pulsando cualquier tecla.
         {
             const string MsgWarning = "press any key to continue...";
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write(MsgWarning);
             Console.ReadKey();
             Console.Clear();
