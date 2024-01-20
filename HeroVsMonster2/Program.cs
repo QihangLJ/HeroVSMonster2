@@ -44,23 +44,26 @@ namespace M03UF2PR1
                   wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
                   monsterHealth = 0, monsterDamage = 0, monsterDamageReduction = 0,
                   heroAttackDamage;
-            int userSelection, roundCount = 0, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
-            bool inGame = true, ExitHeroTurn = false;
+            int userSelection, roundCount, archerCooldownCount = 0, barbarianCooldownCount = 0, action;
+            bool inGame, ExitHeroTurn;
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
             string[] heroesNameArray, battleTurnOrder;
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
-            int[] finalPointArray = [1, 1, 1, 1]; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
+            int[] finalPointArray; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
+            //El menu del juego para que el usuario escog lo que quiere hacer.
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
-            
-            if (userSelection == Error)
+
+            while (userSelection > ExitGame)
             {
-                Console.WriteLine(MsgErrorInput);
-            }
-            else if (userSelection == StartGame)
-            {
+                //Iniciamos todas las variables que necessiten reiniciarse antes de una partida.
+                roundCount = 0;
+                inGame = true;
+                ExitHeroTurn = false;
+                finalPointArray = [1, 1, 1, 1];
+
                 //Ponmemos los nombres a los personajes.
                 nameInput = Utility.EnterCharacterNames();
                 Utility.AssignNameWithString(nameInput, ref archerName, ref barbarianName, ref wizardName, ref druidName);
@@ -69,11 +72,7 @@ namespace M03UF2PR1
                 Print.MenuGameDifficulty();
                 userSelection = Utility.AssignValueInRange(MaxError, EasyMode, RandomMode);
 
-                if (userSelection == Error)
-                {
-                    Console.WriteLine(MsgErrorInput);
-                }
-                else
+                if (userSelection != Error)
                 {
                     //Dependiendo del nivel de juego que hayamos selecionado, el "creación" de personaje sera de una manera o otra.
                     switch (userSelection)
@@ -193,7 +192,7 @@ namespace M03UF2PR1
                                                         case DruidPosition: //Druid ability
                                                             for (int k = 0; k < heroesHealthArray.Length; k++)
                                                             {
-                                                                if(heroesHealthArray[k] > 0)
+                                                                if (heroesHealthArray[k] > 0)
                                                                 {
                                                                     heroesHealthArray[k] += Healing;
                                                                 }
@@ -262,12 +261,19 @@ namespace M03UF2PR1
                             Utility.CleanTheScreen();
                         }
                     }
+
+                    //Volvemos a preguntar al usuario si quiere volver a jugar.
+                    Print.MenuGame();
+                    userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
+
                 }
             }
-            else
+
+            if (userSelection == Error)
             {
-                Console.WriteLine(MsgExit);
+                Console.WriteLine(MsgErrorInput);
             }
+            Console.WriteLine(MsgExit);
         }
     }
 }
