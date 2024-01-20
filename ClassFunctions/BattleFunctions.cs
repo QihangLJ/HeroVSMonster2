@@ -115,13 +115,25 @@ namespace BattleFunctions
         //Devuelve el valor del daño, que puede ser o critico (doble de daño), o falla (no hace daño) o un golpe normal (daño assignado).
         {
             const int CriticalPercentage = 10, FailedPercentage = 5;
-            return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
+            return Utility.Probability(CriticalPercentage) ? CriticalAttack(heroAssignedDamage) : Utility.Probability(FailedPercentage) ? FailedAttack(heroAssignedDamage) : heroAssignedDamage;
         }
 
         public static bool CheckCooldown(int inicialRound, int finalRound)
         //Valida si el la habilidad esta en enfriamiento o no.
         {
             return inicialRound >= finalRound;
+        }
+
+        public static float[] MonsterAttack(float monsterDmg, string[] nameArray, float[] healthArray, float[] dmgRedArray)
+        //Ataca a todos los personajes por igual, utilizando los arrays de atributos.
+        {
+            const string MsgAttackTo = "{0} recieve {1} DMG by the Monster.";
+            for (int i = 0; i < nameArray.Length; i++)
+            {
+                Console.WriteLine(MsgAttackTo, nameArray[i], healthArray[i] - Attacked(monsterDmg, healthArray[i], dmgRedArray[i]));
+                healthArray[i] = Attacked(monsterDmg, healthArray[i], dmgRedArray[i]);
+            }
+            return healthArray;
         }
     }
 }
