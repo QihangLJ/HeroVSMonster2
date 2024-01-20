@@ -54,13 +54,17 @@ namespace M03UF2PR1
             bool inGame, ExitHeroTurn;
             string nameInput, archerName = "", barbarianName = "", wizardName = "", druidName = "";
             
-            string[] heroesNameArray, battleTurnOrder;
+            string[] heroesNameArray, battleTurnOrder, heroesRoles = ["ARCH", "BARB", "WIZA", "DRUI"];
             float[] heroesHealthArray, heroesDamageArray, heroesDmgRedArray;
             int[] finalPointArray; //Esta array nos servira para validar el enfriamiento de las abilidades de los heroes.
 
-            //El menu del juego para que el usuario escog lo que quiere hacer.
+            Print.CleanAndPrintTitle(DrawGameTitle); //Titulo del juego.
+
+            //El menu del juego para que el usuario escoga lo que quiere hacer.
             Print.MenuGame();
             userSelection = Utility.AssignValueInRange(MaxError, ExitGame, StartGame);
+
+            Print.CleanAndPrintTitle(DrawGameTitle);
 
             while (userSelection > ExitGame)
             {
@@ -74,9 +78,13 @@ namespace M03UF2PR1
                 nameInput = Utility.EnterCharacterNames();
                 Utility.AssignNameWithString(nameInput, ref archerName, ref barbarianName, ref wizardName, ref druidName);
 
+                Print.CleanAndPrintTitle(DrawGameTitle);
+
                 //Selecionamos el modo de juego o la dificultad que queremos jugar.
                 Print.MenuGameDifficulty();
                 userSelection = Utility.AssignValueInRange(MaxError, EasyMode, RandomMode);
+
+                Console.Clear();
 
                 if (userSelection != Error)
                 {
@@ -134,6 +142,8 @@ namespace M03UF2PR1
 
                     while (inGame)
                     {
+                        Print.ViewHeroesStats(heroesRoles, heroesNameArray, heroesHealthArray, heroesDamageArray, heroesDmgRedArray);
+
                         //Muestra un contador de rondas al inicio de cada ronda.
                         Print.ShowRoundCounter(ref roundCount);
 

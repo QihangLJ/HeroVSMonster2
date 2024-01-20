@@ -27,7 +27,8 @@
                 else
                 {
                     errorAttempts++;
-                    Console.WriteLine(MsgError);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(MsgError.ToUpper());
                 }
             }
             //En caso de fallar 3 veces, devolvera -1 (ExhaustedAttemtps) indicando que el usuario se quedo sin intentos.
@@ -37,10 +38,15 @@
         public static string EnterCharacterNames()
         //Pide al usuario introducir una string y lo devuelve.
         {
-            const string AskCharacterName = "Enter a string with the names of the characters (separate with ',')";
-            const string MsgWarning = "follow the next order: Archer, Barbarian, Wizard and Druid";
-            Console.WriteLine(AskCharacterName);
+            const string AskCharacterName = "Enter a string with the names of the characters (separate with ','):";
+            const string MsgWarning = "Follow the next order: Archer, Barbarian, Wizard and Druid";
+
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(AskCharacterName.ToUpper());
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(MsgWarning);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine();
 
             return Console.ReadLine()!;
         }
