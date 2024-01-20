@@ -39,6 +39,12 @@ namespace M03UF2PR1
             const string MsgWizardAbility = "{0} attacks with fire ball!";
             const string MsgDruidAbility = "{0} heals everyone for 500 more life points!";
 
+            const string DrawGameTitle = "██████████████████████████████████████████████████████\r\n██╔╗█╔╗████████╔╗██╔╦═══╗╔═╗╔═╗████████╔╗██████╔═══╗██\r\n██║║█║║████████║╚╗╔╝║╔═╗║║║╚╝║║███████╔╝╚╗█████║╔═╗║██\r\n██║╚═╝╠══╦═╦══╗╚╗║║╔╣╚══╗║╔╗╔╗╠══╦═╗╔═╩╗╔╬══╦═╗╚╝╔╝║██\r\n██║╔═╗║║═╣╔╣╔╗║█║╚╝║╚══╗║║║║║║║╔╗║╔╗╣══╣║║║═╣╔╝╔═╝╔╝██\r\n██║║█║║║═╣║║╚╝║█╚╗╔╝║╚═╝║║║║║║║╚╝║║║╠══║╚╣║═╣║█║║╚═╗██\r\n██╚╝█╚╩══╩╝╚══╝██╚╝█╚═══╝╚╝╚╝╚╩══╩╝╚╩══╩═╩══╩╝█╚═══╝██\r\n██████████████████████████████████████████████████████\r\n";
+            const string DrawArcher = "████╔╗███████\r\n████║╚╗██████\r\n║███║█╚═╗█═╗█\r\n╠═══╬═══╬══╬═\r\n║███║█╔═╝█═╝█\r\n████║╔╝██████\r\n████╚╝███████\r\n";
+            const string DrawBarbarian = "█████╔═════╗█\r\n█████║███╔═╩╗\r\n█████║█╔═╝██║\r\n████╔╩═╬╗███║\r\n█╔══╝╔═╝╚═══╝\r\n╔╝╔══╝███████\r\n╚═╝██████████\r\n";
+            const string DrawWizard = "██████║██████\r\n█████╔╩╗█████\r\n████╔╝█╚╗████\r\n█╔═╦╝███╚╦═╗█\r\n╔╝█╚═════╝█╚╗\r\n╚╗█████████╔╝\r\n█╚═════════╝█\r\n";
+            const string DrawDruid = "████╔═════╗██\r\n██╔═╝█████╚╗█\r\n█╔╝██╔══╗██║█\r\n█║█╔═╝█═╝██║█\r\n█║█╚╗█████╔╝█\r\n█╚╗█╚═════╝██\r\n██║██████████\r\n";
+            const string DrawMonster = "╔╗█████████╔╗\r\n╚╬═╗█████╔═╬╝\r\n█╚╦╩══╦══╩╦╝█\r\n██║███║███║██\r\n██║╔══╩══╗║██\r\n██║╚═════╝║██\r\n██╚═══════╝██\r\n";
 
             float archerHealth = 0, archerDamage = 0, archerDamageReduction = 0, barbarianHealth = 0, barbarianDamage = 0, barbarianDamageReduction = 0,
                   wizardHealth = 0, wizardDamage = 0, wizardDamageReduction = 0, druidHealth = 0, druidDamage = 0, druidDamageReduction = 0,
