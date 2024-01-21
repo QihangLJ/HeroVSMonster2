@@ -40,8 +40,7 @@ namespace MessagePrints
             round++;
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine(MsgWarning.ToUpper(), round);
-            Console.WriteLine();
+            Console.WriteLine(MsgWarning.ToUpper() + "\n", round);
             Console.ResetColor();
         }
 
@@ -143,6 +142,11 @@ namespace MessagePrints
                     ViewCharacterStats(role[i], name[i], health[i], damage[i], damageRed[i]);
                 }
             }
+        }
+
+        public static void TestProcedure()
+        {
+            Console.Write("test");
         }
     }
 }

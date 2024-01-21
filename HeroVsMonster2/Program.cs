@@ -2,7 +2,6 @@
 using BattleFunctions;
 using UsefullFunction;
 using MessagePrints;
-using System.Xml.Linq;
 
 namespace M03UF2PR1
 {
