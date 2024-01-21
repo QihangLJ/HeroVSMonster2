@@ -23,7 +23,7 @@ namespace M03UF2PR1
                       MonsterMinHealth = 7000, MonsterMaxHealth = 10000, MonsterMinDamage = 300, MonsterMaxDamage = 400, MonsterMinDamageReduction = 20, MonsterMaxDamageReduction = 30;
 
             const string MonsterName = "Monster";
-            const string MsgCreationTurn = "{0} Creation...";
+            const string MsgCreationTurn = "{0} ({1}) CREATION...";
             const string MsgCooldown = "It's on cooldown, wait {0} rounds more.";
             const string MsgErrorInput = "You have run out of attempts!";
             const string MsgExit = "Leaving the game...";
@@ -114,31 +114,31 @@ namespace M03UF2PR1
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(DrawArcher);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine(MsgCreationTurn + "\n", archerName.ToUpper());
+                            Console.WriteLine(MsgCreationTurn, archerName.ToUpper(), heroesRoles[ArcherPosition]);
                             Creation.AssignAttributeValue(ref archerHealth, ArcherMinHealth, ArcherMaxHealth, ref archerDamage, ArcherMinDamage, ArcherMaxDamage, ref archerDamageReduction, ArcherMinDamageReduction, ArcherMaxDamageReduction, MaxError);
 
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(DrawBarbarian);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine(MsgCreationTurn + "\n", barbarianName.ToUpper());
+                            Console.WriteLine(MsgCreationTurn, barbarianName.ToUpper(), heroesRoles[BarbarianPosition]);
                             Creation.AssignAttributeValue(ref barbarianHealth, BarbarianMinHealth, BarbarianMaxHealth, ref barbarianDamage, BarbarianMinDamage, BarbarianMaxDamage, ref barbarianDamageReduction, BarbarianMinDamageReduction, BarbarianMaxDamageReduction, MaxError);
 
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(DrawWizard);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine(MsgCreationTurn + "\n", wizardName.ToUpper());
+                            Console.WriteLine(MsgCreationTurn, wizardName.ToUpper(), heroesRoles[WizardPosition]);
                             Creation.AssignAttributeValue(ref wizardHealth, WizardMinHealth, WizardMaxHealth, ref wizardDamage, WizardMinDamage, WizardMaxDamage, ref wizardDamageReduction, WizardMinDamageReduction, WizardMaxDamageReduction, MaxError);
 
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(DrawDruid);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine(MsgCreationTurn + "\n", druidName.ToUpper());
+                            Console.WriteLine(MsgCreationTurn, druidName.ToUpper(), heroesRoles[DruidPosition]);
                             Creation.AssignAttributeValue(ref druidHealth, DruidMinHealth, DruidMaxHealth, ref druidDamage, DruidMinDamage, DruidMaxDamage, ref druidDamageReduction, DruidMinDamageReduction, DruidMaxDamageReduction, MaxError);
 
                             Console.ForegroundColor = ConsoleColor.DarkMagenta;
                             Console.WriteLine(DrawMonster);
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine(MsgCreationTurn + "\n", MonsterName.ToUpper());
+                            Console.WriteLine(MsgCreationTurn, MonsterName.ToUpper(), MonsterName);
                             Creation.AssignAttributeValue(ref monsterHealth, MonsterMinHealth, MonsterMaxHealth, ref monsterDamage, MonsterMinDamage, MonsterMaxDamage, ref monsterDamageReduction, MonsterMinDamageReduction, MonsterMaxDamageReduction, MaxError);
 
                             Console.Clear();
