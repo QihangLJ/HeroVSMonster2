@@ -72,7 +72,7 @@ namespace TestProject
         {
             //Arrange
             float[] healthArray = [100.0f, 0.0f, 50.0f];
-            string[] nameArray = ["Hero1", "Hero2", "Hero3"];
+            string[] nameArray = ["HeroOne", "HeroTwo", "HeroThree"];
 
             var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
@@ -81,7 +81,7 @@ namespace TestProject
             Print.PrintHealthMessage(healthArray, nameArray);
 
             //Assert
-            string expectedOutput = "   - HERO1 have 100 HP \n   - HERO2 is DEAD \n   - HERO3 have 50 HP";
+            string expectedOutput = "   - HeroOne have 100 HP \n   - HeroTwo is DEAD \n   - HeroThree have 50 HP";
             Assert.AreEqual(expectedOutput, consoleOutput.ToString().Trim());
         }
 
@@ -90,7 +90,7 @@ namespace TestProject
         {
             //Arrange
             float[] healthArray = [100.0f, 50.0f, 75.0f];
-            string[] nameArray = ["Hero1", "Hero2", "Hero3"];
+            string[] nameArray = ["HeroOne", "HeroTwo", "HeroThree"];
 
             var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
@@ -99,7 +99,7 @@ namespace TestProject
             Print.ShowSortedHealth(healthArray, nameArray);
 
             //Assert
-            string expectedOutput = "THE BATTLE SITUATION IS THE NEXT:\n   - HERO1 have 100 HP\n   - HERO3 have 75 HP\n   - HERO2 have 50 HP";
+            string expectedOutput = "THE BATTLE SITUATION IS THE NEXT:\n   - HeroOne have 100 HP\n   - HeroThree have 75 HP\n   - HeroTwo have 50 HP";
             Assert.AreEqual(expectedOutput, consoleOutput.ToString().Trim());
         }
 
@@ -179,19 +179,19 @@ namespace TestProject
             Print.ViewCharacterStats(role, name, health, damage, damageReduction);
 
             //Assert
-            string expectedOutput = "ROLE: Warrior  /  NAME: Hero1  /  HEALTH: 100  /  DAMAGE: 20  /  DAMAGE REDUCTION: 10";
+            string expectedOutput = "ROLE: Warrior  /  NAME: Monster  /  HEALTH: 100  /  DAMAGE: 20  /  DAMAGE REDUCTION: 10";
             Assert.AreEqual(expectedOutput, consoleOutput.ToString().Trim());
         }
 
         [TestMethod]
-        public void ViewHeroesStats_ShouldDisplayCorrectStats()
+        public void PrintHeroesStats_DisplayCorrectly()
         {
             //Arrange
             var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
 
             string[] roles = ["Archer", "Barbarian"];
-            string[] names = ["Hero1", "Hero2"];
+            string[] names = ["HeroOne", "HeroTwo"];
             float[] health = [100.0f, 80.0f];
             float[] damage = [20.0f, 30.0f];
             float[] damageReduction = [10.0f, 15.0f];
@@ -200,8 +200,8 @@ namespace TestProject
             Print.ViewHeroesStats(roles, names, health, damage, damageReduction);
 
             //Assert
-            var expectedOutput = "ROLE: Archer  /  NAME: Hero1  /  HEALTH: 100  /  DAMAGE: 20  /  DAMAGE REDUCTION: 10" +
-                                 "\nROLE: Barbarian  /  NAME: Hero2  /  HEALTH: 80  /  DAMAGE: 30  /  DAMAGE REDUCTION: 15";
+            var expectedOutput = "ROLE: Archer  /  NAME: HeroOne  /  HEALTH: 100  /  DAMAGE: 20  /  DAMAGE REDUCTION: 10" +
+                                 "\nROLE: Barbarian  /  NAME: HeroTwo  /  HEALTH: 80  /  DAMAGE: 30  /  DAMAGE REDUCTION: 15";
             Assert.AreEqual(expectedOutput, consoleOutput.ToString().Trim());
         }
 
