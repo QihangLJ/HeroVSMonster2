@@ -26,11 +26,11 @@ namespace TestProject
         public void UserInputValue_ValuNotAccepted_AssignMinValue()
         {
             //Arrange
-            var consoleInput = new StringReader("200");
+            var consoleInput = new StringReader("200\n150\n120"); //Introducimos un total de 3 valores.
             Console.SetIn(consoleInput);
 
             string msg = "Enter a value for {0} ({1}-{2}):", item = "Health";
-            int min = 1, max = 100, error = 0; //Declaramos error = 0, para que nos salta el error al primer input.
+            int min = 1, max = 100, error = 3;
 
             //Act
             float result = Creation.PersonalizeAttribute(msg, item, min, max, error);
