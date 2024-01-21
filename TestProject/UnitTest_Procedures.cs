@@ -64,7 +64,7 @@ namespace TestProject
             //Assert
             string expectedOutput = "ROUND: 1";
             Assert.AreEqual(expectedOutput, consoleOutput.ToString().Trim());
-            Assert.AreEqual(1, round); // Verifica que el valor de la variable "round" se haya incrementado correctamente
+            Assert.AreEqual(1, round);
         }
 
         [TestMethod]

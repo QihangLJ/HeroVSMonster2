@@ -1,5 +1,4 @@
 ﻿using CreationFunctions;
-using UsefullFunction;
 
 namespace TestProject
 {
@@ -76,13 +75,13 @@ namespace TestProject
         [TestMethod]
         public void CreateFloatArray_ReturnFloatArray()
         {
-            // Arrange
+            //Arrange
             float valueOne = 10.0f, valueTwo = 20.0f, valueThree = 30.0f, valueFour = 40.0f;
 
-            // Act
+            //Act
             float[] result = Creation.CreateFloatArray(valueOne, valueTwo, valueThree, valueFour);
 
-            // Assert
+            //Assert
             Assert.AreEqual(valueOne, result[0]);
             Assert.AreEqual(valueTwo, result[1]);
             Assert.AreEqual(valueThree, result[2]);
@@ -92,18 +91,17 @@ namespace TestProject
         [TestMethod]
         public void CreateStringArray_ReturnStringArray()
         {
-            // Arrange
+            //Arrange
             string valueOne = "nameOne", valueTwo = "nameTwo", valueThree = "nameThree", valueFour = "nameFour";
 
-            // Act
+            //Act
             string[] result = Creation.CreateStringArray(valueOne, valueTwo, valueThree, valueFour);
 
-            // Assert
+            //Assert
             Assert.AreEqual(valueOne, result[0]);
             Assert.AreEqual(valueTwo, result[1]);
             Assert.AreEqual(valueThree, result[2]);
             Assert.AreEqual(valueFour, result[3]);
         }
-
     }
 }
