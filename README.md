@@ -260,14 +260,53 @@
 
 ## SCREEN PRINTS PROCEDURES
 
-- Estos procedimientos cumplen la funcionalidad de mostrar por pantalla mensajes al usuario con el objetivo de informarle.
+
+- Estos procedimientos cumplen la funcionalidad de mostrar por pantalla mensajes al usuario con el objetivo de informarle, es por eso que no le encontre sentido para hacer las clases de equivalencia.
 - La mayoria de estos se muestran de un color distinto para mejorar el UX, por lo tanto al hacer el Unit Testing, casi todos de ellos no passan los tests.
 
 
+### MenuGame:
+- Muestra el menu del juego, preguntando al usuario si quiere jugar una partida o si quiere abandonarla.
 
 
+### MenuGameDifficulty:
+- Muestra el menu de los modos (dificultad) de juegos que puede seleccioanr el usuario.
 
 
+### ShowRoundCounter:
+- Muestra un contador al inicio de cada ronda, que va aumentando segun las rondas que vaya pasando.
+
+
+### PrintHealthMessage:
+- Muestra la cantiddad de vida que tiene el personaje en el caso de que siga vivo, en caso contrario, muestra un mensaje de que esta muerto.
+
+
+### ShowSortedHealth:
+- Muestra de forma descendiente la situacion de los heroes en la batalla, con la ayuda del mensaje anterior.
+
+
+### BattleAction:
+- Muestra y pide al usuario indicar una accion para que lo realize el personaje, (atacar, proteger, habilidad especial).
+
+
+### ShowAttackInformation:
+- Muestra la informacion del ataque, si algun personaje realiza la accion de infligir daño.
+
+
+### CleanAndPrintTitle:
+- Limpia el contenido de la consola y instantaneamente muestra un mensaje.
+
+
+### ViewCharacterStats:
+- Muestra la estadistica de un personaje individual.
+
+
+### ViewHeroesStats:
+- Muestra la estadistica de todos los heroes.
+
+
+### TestProcedure:
+- Procedimiento para probar que los test del UNIT TESTING funcionan correctamente, mostrando un mensaje simple por consola.
 
 
 
