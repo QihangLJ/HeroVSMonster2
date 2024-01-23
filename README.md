@@ -260,6 +260,8 @@
 
 ## SCREEN PRINTS PROCEDURES
 
+- Estos procedimientos cumplen la funcionalidad de mostrar por pantalla mensajes al usuario con el objetivo de informarle.
+- La mayoria de estos se muestran de un color distinto para mejorar el UX, por lo tanto al hacer el Unit Testing, casi todos de ellos no passan los tests.
 
 
 
